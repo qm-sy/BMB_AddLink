@@ -1,0 +1,71 @@
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/08/2025 14:53:53 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE LEVEL
+OBJECT MODULE PLACED IN ..\Output\level.obj
+COMPILER INVOKED BY: D:\APP\Keil_v5\C51\BIN\C51.EXE ..\BSP\Src\level.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\BSP\Inc;
+                    -..\Core\Inc;..\Drivers;..\Middlewares;..\Emembed\Inc;..\SYSTEM\Inc) DEBUG OBJECTEXTEND PRINT(.\Listings\level.lst) OBJEC
+                    -T(..\Output\level.obj)
+
+line level    source
+
+   1          #include "level.h"
+   2          
+   3          LEVEL level;
+   4          
+   5          void level_scan( void )
+   6          {
+   7   1          if( LEVEL1_L == 0 )
+   8   1          {
+   9   2              /*  下浮球下落，电机启动并计时    */
+  10   2              MOTOR1 = 1;
+  11   2              level.motor1_flag = 1;
+  12   2          }
+  13   1          
+  14   1          
+  15   1          if( LEVEL2_L == 0 )
+  16   1          {
+  17   2              MOTOR2 = 1;
+  18   2              level.motor2_flag = 1;
+  19   2          }
+  20   1      
+  21   1          if( LEVEL3_L == 0 )
+  22   1          {
+  23   2              MOTOR3 = 1;
+  24   2              level.motor3_flag = 1;
+  25   2          }
+  26   1      
+  27   1          if( LEVEL4_L == 0 )
+  28   1          {
+  29   2              MOTOR4 = 1;
+  30   2              level.motor4_flag = 1;
+  31   2          }
+  32   1      
+  33   1          if( LEVEL5_L == 0 )
+  34   1          {
+  35   2              MOTOR5 = 1;
+  36   2              level.motor5_flag = 1;
+  37   2          }
+  38   1      
+  39   1          if( LEVEL6_L == 0 )
+  40   1          {
+  41   2              MOTOR6 = 6;
+  42   2              level.motor6_flag = 1;
+  43   2          }
+  44   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     67    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =     40    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/08/2025 14:53:53 PAGE 2   
+
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

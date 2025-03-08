@@ -1,0 +1,16 @@
+{
+    "files.exclude": {
+        "**/.vscode": true
+    },
+    "files.associations": {
+        "eeprom.h": "c",
+        "sys.h": "c",
+        "stc15w4kxx.h": "c",
+        "gpio.h": "c",
+        "string.h": "c",
+        "main.h": "c",
+        "uart.h": "c",
+        "level.h": "c",
+        "tim.h": "c"
+    }
+}

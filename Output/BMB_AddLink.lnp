@@ -1,0 +1,10 @@
+"..\Output\STARTUP.obj",
+"..\Output\eeprom.obj",
+"..\Output\gpio.obj",
+"..\Output\main.obj",
+"..\Output\uart.obj",
+"..\Output\tim.obj",
+"..\Output\level.obj",
+"..\Output\delay.obj" 
+TO "..\Output\BMB_AddLink" 
+PRINT(".\Listings\BMB_AddLink.m51") RAMSIZE(256) 

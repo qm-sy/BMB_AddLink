@@ -1,0 +1,100 @@
+C51 COMPILER V9.60.7.0   TIM                                                               03/08/2025 14:53:53 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TIM
+OBJECT MODULE PLACED IN ..\Output\tim.obj
+COMPILER INVOKED BY: D:\APP\Keil_v5\C51\BIN\C51.EXE ..\Core\Src\tim.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\BSP\Inc;.
+                    -.\Core\Inc;..\Drivers;..\Middlewares;..\Emembed\Inc;..\SYSTEM\Inc) DEBUG OBJECTEXTEND PRINT(.\Listings\tim.lst) OBJECT(.
+                    -.\Output\tim.obj)
+
+line level    source
+
+   1          #include "tim.h"
+   2          
+   3          void Timer0_Init()         //11.0592Mhz  10ms
+   4          {
+   5   1              AUXR &= 0x7F;                   //定时器时钟12T模式
+   6   1              TMOD &= 0xF0;                   //设置定时器模式
+   7   1              TL0 = 0x00;                             //设置定时初始值
+   8   1              TH0 = 0xDC;                             //设置定时初始值
+   9   1              TF0 = 0;                                //清除TF0标志
+  10   1              TR0 = 1;                                //定时器0开始计时
+  11   1      
+  12   1              ET0 = 1;                //打开IE-ET0，TIM0中断
+  13   1      }
+  14          
+  15          void Tim0Isr(void) interrupt 1 
+  16          {
+  17   1          /*  补墨并计时    */
+  18   1          if( level.motor1_flag == 1 )
+  19   1          {
+  20   2              if( LEVEL1_L == 0 )     //下浮球处于低位，开始补墨并计时t1
+  21   2              {
+  22   3                  level.motor1_delay_t1++;
+  23   3      
+  24   3                  /*  1.如果t1时间后下浮球仍处于低位  */
+  25   3                  if( level.motor1_delay_t1 == level.motor_warning_delay )
+  26   3                  {
+  27   4                      /*  2.判断为墨桶缺墨，发出报警  */
+  28   4                      DC24V_OUT1 = 1;
+  29   4      
+  30   4                      MOTOR1 = 0;
+  31   4      
+  32   4                      level.motor1_flag  = 0;
+  33   4                      level.motor1_delay_t1 = 0;
+  34   4                      level.motor1_warning_flag = 1;
+  35   4                  }
+  36   3              }else                   //下浮球处于低位，开始补墨并计时t2
+  37   2              {
+  38   3                  level.motor1_delay_t2++;
+  39   3      
+  40   3                  /*  1.t2补墨时间到  */
+  41   3                  if( level.motor1_delay_t2 == level.motor_stop_delay )
+  42   3                  {
+  43   4                      /*  2.电机停止  */
+  44   4                      MOTOR1 = 0;
+  45   4      
+  46   4                      level.motor1_flag  = 0;
+  47   4                      level.motor1_delay_t1 = 0;
+  48   4                      level.motor1_delay_t2 = 0;
+  49   4                  }
+  50   3              }
+  51   2              if( LEVEL1_H == 1 ) //上浮球处于高位
+  52   2              {
+  53   3                  /*  1.未知原因导致墨水溢出 电机停止并报警  */
+C51 COMPILER V9.60.7.0   TIM                                                               03/08/2025 14:53:53 PAGE 2   
+
+  54   3                  DC24V_OUT2 = 1;
+  55   3      
+  56   3                  MOTOR1 = 0;
+  57   3      
+  58   3                  level.motor1_flag  = 0;
+  59   3                  level.motor1_delay_t1 = 0;
+  60   3                  level.motor1_delay_t2 = 0;
+  61   3              }
+  62   2          }
+  63   1      
+  64   1          if( level.motor1_warning_flag & level.motor2_warning_flag & level.motor3_warning_flag    \
+  65   1             &level.motor4_warning_flag & level.motor5_warning_flag & level.motor6_warning_flag == 0 )   
+  66   1             {
+  67   2                  buzzer = 0;
+  68   2             }else
+  69   1             {
+  70   2                  buzzer = 1;
+  71   2             }
+  72   1          
+  73   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    238    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
