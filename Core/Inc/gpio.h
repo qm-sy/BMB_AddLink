@@ -18,23 +18,23 @@ void GPIO_Init( void );
 
 sbit buzzer      = P5^4;
 
-sbit LEVEL1_H    = P1^3;
-sbit LEVEL1_L    = P1^4;
+sbit LEVEL1_L    = P1^3;
+sbit LEVEL1_H    = P1^4;
 
-sbit LEVEL2_H    = P2^6;
-sbit LEVEL2_L    = P2^5;
+sbit LEVEL2_L    = P2^6;
+sbit LEVEL2_H    = P2^5;
 
-sbit LEVEL3_H    = P1^2;
-sbit LEVEL3_L    = P1^1;
+sbit LEVEL3_L    = P1^2;
+sbit LEVEL3_H    = P1^1;
 
-sbit LEVEL4_H    = P2^7;
-sbit LEVEL4_L    = P0^0;
+sbit LEVEL4_L    = P2^7;
+sbit LEVEL4_H    = P0^0;
 
-sbit LEVEL5_H    = P1^0;
-sbit LEVEL5_L    = P0^3;
+sbit LEVEL5_L    = P1^0;
+sbit LEVEL5_H    = P0^3;
 
-sbit LEVEL6_H    = P0^1;
-sbit LEVEL6_L    = P0^2;
+sbit LEVEL6_L    = P0^1;
+sbit LEVEL6_H    = P0^2;
 
 sbit MOTOR1      = P3^3;
 sbit MOTOR2      = P3^4;
@@ -45,7 +45,7 @@ sbit MOTOR6      = P2^3;
 
 sbit RESET       = P2^4;
 
-sbit DC24V_OUT1  = P2^2;
-sbit DC24V_OUT2  = P3^2;
+sbit INK_OUT     = P2^2;
+sbit INK_OVERFLOW  = P3^2;
 
 #endif

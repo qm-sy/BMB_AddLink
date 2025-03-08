@@ -10,5 +10,6 @@
 #include "eeprom.h"
 
 #include "level.h"
+#include "eeprom_crl.h"
 
 #endif

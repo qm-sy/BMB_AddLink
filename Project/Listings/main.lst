@@ -1,11 +1,11 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              03/08/2025 14:53:53 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              03/08/2025 23:40:05 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
 OBJECT MODULE PLACED IN ..\Output\main.obj
-COMPILER INVOKED BY: D:\APP\Keil_v5\C51\BIN\C51.EXE ..\Core\Src\main.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\BSP\Inc;
-                    -..\Core\Inc;..\Drivers;..\Middlewares;..\Emembed\Inc;..\SYSTEM\Inc) DEBUG OBJECTEXTEND PRINT(.\Listings\main.lst) OBJECT
-                    -(..\Output\main.obj)
+COMPILER INVOKED BY: D:\APP\Keil_STM32\C51\BIN\C51.EXE ..\Core\Src\main.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\BSP\I
+                    -nc;..\Core\Inc;..\Drivers;..\Middlewares;..\Emembed\Inc;..\SYSTEM\Inc) DEBUG OBJECTEXTEND PRINT(.\Listings\main.lst) OBJ
+                    -ECT(..\Output\main.obj)
 
 line level    source
 
@@ -17,18 +17,26 @@ line level    source
    6   1          
    7   1          GPIO_Init();
    8   1          Timer0_Init();
-   9   1          
-  10   1          printf("========== code start ========== \r\n");
-  11   1      
-  12   1          while (1)
-  13   1          {
-  14   2              level_scan();
-  15   2          }  
-  16   1      }
+   9   1          Timer1_Init();
+  10   1      
+  11   1          level_params_init();
+  12   1          speak_param_init();
+  13   1          motor_init();
+  14   1      
+  15   1          EA = 1;
+  16   1          eeprom_statu_judge();
+  17   1          printf("========== code start ========== \r\n");
+  18   1      
+  19   1          while (1)
+  20   1          {
+  21   2              level_statu();
+  22   2              key_reset();
+  23   2          }  
+  24   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     23    ----
+   CODE SIZE        =     43    ----
    CONSTANT SIZE    =     36    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

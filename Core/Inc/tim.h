@@ -4,9 +4,7 @@
 #include "sys.h"
 #include "level.h"
 
-#define MOTOR_WARNING_DELAY     2000
-#define MOTOR_WARNING_DELAY     2000
 
 void Timer0_Init( void );		
-
+void Timer1_Init( void );
 #endif
