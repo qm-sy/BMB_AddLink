@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   UART                                                              03/08/2025 23:40:05 PAGE 1   
+C51 COMPILER V9.60.7.0   UART                                                              03/09/2025 16:42:17 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE UART
@@ -20,7 +20,7 @@ line level    source
    9          **/
   10          void Uart1_Init( void )       //115200bps@11.0592MHz  16位自动装载
   11          {
-  12   1          P_SW2 |= 0X00;           //串口1功能脚选择P3.0 P3.1
+  12   1          P_SW1 |= 0X40;           //串口1功能脚选择P3.6 P3.7
   13   1      
   14   1              SCON   = 0x50;           //8位数据,可变波特率
   15   1      
@@ -32,52 +32,15 @@ line level    source
   21   1      
   22   1              AUXR  |= 0x10;           //定时器2开始计时
   23   1      
-  24   1              IE2   |= 0X01;                  //串口2 中断允许位
+  24   1              ES    = 1;                          //串口1 中断允许位
   25   1      }
   26          
-  27          void Uart1_ISR() interrupt 4 
-  28          {   
-  29   1          if(TI == 1)
-  30   1          {
-  31   2              TI = 0;
-  32   2          }
-  33   1          
-  34   1          if(RI == 1)
-  35   1          {
-  36   2              RI = 0;
-  37   2          }
-  38   1      }
-  39          
-  40          void Uart1_Sendbyte(uint8_t dat)
-  41          {
-  42   1          while(TI);
-  43   1          TI = 1;
-  44   1          SBUF = dat;
-  45   1      }
-  46          
-  47          void Uart1_SendStr(uint8_t *sendstr)
-  48          {   
-  49   1          while(*sendstr)
-  50   1          {
-  51   2              Uart1_Sendbyte(*sendstr++);
-  52   2          }
-  53   1      }
-C51 COMPILER V9.60.7.0   UART                                                              03/08/2025 23:40:05 PAGE 2   
-
-  54          
-  55          char putchar(char c)  // 串口重定向需要添加头文件stdio.h
-  56          {
-  57   1          SBUF = c;
-  58   1          while(!TI);
-  59   1          TI = 0;
-  60   1          return c;
-  61   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    100    ----
+   CODE SIZE        =     24    ----
    CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =   ----       3
+   XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----

@@ -61,6 +61,9 @@ void motor_init( void )
     MOTOR4 = MOTOR_OFF;
     MOTOR5 = MOTOR_OFF;
     MOTOR6 = MOTOR_OFF;
+
+    INK_OUT       = 0;
+    INK_OVERFLOW  = 0;
 }
 
 void level_statu( void )
@@ -318,7 +321,7 @@ void Tim0Isr(void) interrupt 1
            level.motor1_warning_cnt++;
 
            /*  1.如果t1时间后下浮球仍处于低位  */
-           if( level.motor1_warning_cnt == level.motor_warning_delay )
+           if( level.motor1_warning_cnt >= level.motor_warning_delay )
            {
                /*  2.判断为墨桶缺墨，发出报警  */
                INK_OUT = 1;
@@ -333,7 +336,7 @@ void Tim0Isr(void) interrupt 1
            level.motor1_stop_cnt++;
 
            /*  1.t2补墨时间到  */
-           if( level.motor1_stop_cnt == level.motor_stop_delay )
+           if( level.motor1_stop_cnt >= level.motor_stop_delay )
            {
                /*  2.电机停止  */
                MOTOR1 = MOTOR_OFF;
@@ -352,7 +355,7 @@ void Tim0Isr(void) interrupt 1
            level.motor2_warning_cnt++;
 
            /*  1.如果t1时间后下浮球仍处于低位  */
-           if( level.motor2_warning_cnt == level.motor_warning_delay )
+           if( level.motor2_warning_cnt >= level.motor_warning_delay )
            {
                /*  2.判断为墨桶缺墨，发出报警  */
                INK_OUT = 1;
@@ -367,7 +370,7 @@ void Tim0Isr(void) interrupt 1
            level.motor2_stop_cnt++;
 
            /*  1.t2补墨时间到  */
-           if( level.motor2_stop_cnt == level.motor_stop_delay )
+           if( level.motor2_stop_cnt >= level.motor_stop_delay )
            {
                /*  2.电机停止  */
                MOTOR2 = MOTOR_OFF;
@@ -386,7 +389,7 @@ void Tim0Isr(void) interrupt 1
            level.motor3_warning_cnt++;
 
            /*  1.如果t1时间后下浮球仍处于低位  */
-           if( level.motor3_warning_cnt == level.motor_warning_delay )
+           if( level.motor3_warning_cnt >= level.motor_warning_delay )
            {
                /*  2.判断为墨桶缺墨，发出报警  */
                INK_OUT = 1;
@@ -401,7 +404,7 @@ void Tim0Isr(void) interrupt 1
            level.motor3_stop_cnt++;
 
            /*  1.t2补墨时间到  */
-           if( level.motor3_stop_cnt == level.motor_stop_delay )
+           if( level.motor3_stop_cnt >= level.motor_stop_delay )
            {
                /*  2.电机停止  */
                MOTOR3 = MOTOR_OFF;
@@ -420,7 +423,7 @@ void Tim0Isr(void) interrupt 1
            level.motor4_warning_cnt++;
 
            /*  1.如果t1时间后下浮球仍处于低位  */
-           if( level.motor4_warning_cnt == level.motor_warning_delay )
+           if( level.motor4_warning_cnt >= level.motor_warning_delay )
            {
                /*  2.判断为墨桶缺墨，发出报警  */
                INK_OUT = 1;
@@ -435,7 +438,7 @@ void Tim0Isr(void) interrupt 1
            level.motor4_stop_cnt++;
 
            /*  1.t2补墨时间到  */
-           if( level.motor4_stop_cnt == level.motor_stop_delay )
+           if( level.motor4_stop_cnt >= level.motor_stop_delay )
            {
                /*  2.电机停止  */
                MOTOR4 = MOTOR_OFF;
@@ -454,7 +457,7 @@ void Tim0Isr(void) interrupt 1
            level.motor5_warning_cnt++;
 
            /*  1.如果t1时间后下浮球仍处于低位  */
-           if( level.motor5_warning_cnt == level.motor_warning_delay )
+           if( level.motor5_warning_cnt >= level.motor_warning_delay )
            {
                /*  2.判断为墨桶缺墨，发出报警  */
                INK_OUT = 1;
@@ -469,7 +472,7 @@ void Tim0Isr(void) interrupt 1
            level.motor5_stop_cnt++;
 
            /*  1.t2补墨时间到  */
-           if( level.motor5_stop_cnt == level.motor_stop_delay )
+           if( level.motor5_stop_cnt >= level.motor_stop_delay )
            {
                /*  2.电机停止  */
                MOTOR5 = MOTOR_OFF;
@@ -488,7 +491,7 @@ void Tim0Isr(void) interrupt 1
            level.motor6_warning_cnt++;
 
            /*  1.如果t1时间后下浮球仍处于低位  */
-           if( level.motor6_warning_cnt == level.motor_warning_delay )
+           if( level.motor6_warning_cnt >= level.motor_warning_delay )
            {
                /*  2.判断为墨桶缺墨，发出报警  */
                INK_OUT = 1;
@@ -503,7 +506,7 @@ void Tim0Isr(void) interrupt 1
            level.motor6_stop_cnt++;
 
            /*  1.t2补墨时间到  */
-           if( level.motor6_stop_cnt == level.motor_stop_delay )
+           if( level.motor6_stop_cnt >= level.motor_stop_delay )
            {
                /*  2.电机停止  */
                MOTOR6 = MOTOR_OFF;
@@ -520,7 +523,7 @@ void Tim1Isr(void) interrupt 3
     if( speak.buzzer_start_flag == 1 )
     {
         speak.buzzer_runing_cnt++;
-        if( speak.buzzer_runing_cnt == 50 )
+        if( speak.buzzer_runing_cnt == 500 )
         {
             speak.buzzer_runing_cnt = 0;
             speak.buzzer_statu = 1 - speak.buzzer_statu;
@@ -530,4 +533,20 @@ void Tim1Isr(void) interrupt 3
     {
         speak.buzzer_runing_cnt = 0;
     }
+
+    /* 1, 如果接收未超时                                             */
+    if ( rs485.RX_rev_timeout != 0 )  
+    {
+        rs485.RX_rev_timeout--;
+        /* 2, 如果接收超时                                          */
+        if( rs485.RX_rev_timeout == 0 )  
+        {
+            if( rs485.RX_rev_cnt > 0 )  
+            {   
+                    /* 3, 接收完毕标志位亮起并初始化接收缓冲区         */
+                rs485.RX_rev_end_Flag = 1;    
+            }
+        }
+    } 
+    
 }

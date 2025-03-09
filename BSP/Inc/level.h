@@ -3,6 +3,7 @@
 
 #include "gpio.h"
 #include "delay.h"
+#include "communication.h"
 
 #define MOTOR_ON    1
 #define MOTOR_OFF   0

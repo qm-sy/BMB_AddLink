@@ -11,5 +11,7 @@
 
 #include "level.h"
 #include "eeprom_crl.h"
+#include "communication.h"
+#include "modbus_rtu.h"
 
 #endif

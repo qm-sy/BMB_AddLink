@@ -432,6 +432,11 @@
               <FileType>1</FileType>
               <FilePath>..\BSP\Src\eeprom_crl.c</FilePath>
             </File>
+            <File>
+              <FileName>communication.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\Src\communication.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -446,6 +451,13 @@
         </Group>
         <Group>
           <GroupName>Emembed</GroupName>
+          <Files>
+            <File>
+              <FileName>modbus_rtu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Emembed\Src\modbus_rtu.c</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>

@@ -45,7 +45,7 @@ sbit MOTOR6      = P2^3;
 
 sbit RESET       = P2^4;
 
-sbit INK_OUT     = P2^2;
+sbit INK_OUT       = P2^2;
 sbit INK_OVERFLOW  = P3^2;
 
 #endif

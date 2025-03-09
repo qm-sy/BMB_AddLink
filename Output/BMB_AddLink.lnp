@@ -6,6 +6,8 @@
 "..\Output\tim.obj",
 "..\Output\level.obj",
 "..\Output\eeprom_crl.obj",
-"..\Output\delay.obj" 
+"..\Output\communication.obj",
+"..\Output\delay.obj",
+"..\Output\modbus_rtu.obj" 
 TO "..\Output\BMB_AddLink" 
 PRINT(".\Listings\BMB_AddLink.m51") RAMSIZE(256) 

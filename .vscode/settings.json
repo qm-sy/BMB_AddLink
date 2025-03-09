@@ -11,6 +11,8 @@
         "main.h": "c",
         "uart.h": "c",
         "level.h": "c",
-        "tim.h": "c"
+        "tim.h": "c",
+        "modbus_rtu.h": "c",
+        "communication.h": "c"
     }
 }

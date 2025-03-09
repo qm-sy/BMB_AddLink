@@ -8,6 +8,10 @@ void main( void )
     Timer0_Init();
     Timer1_Init();
 
+    Uart1_Init();
+    Uart1_Send_Statu_Init();
+
+
     level_params_init();
     speak_param_init();
     motor_init();
@@ -20,5 +24,6 @@ void main( void )
     {
         level_statu();
         key_reset();
+        Modbus_Event();
     }  
 }

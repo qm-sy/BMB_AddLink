@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   TIM                                                               03/08/2025 23:40:05 PAGE 1   
+C51 COMPILER V9.60.7.0   TIM                                                               03/09/2025 16:42:17 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TIM
@@ -23,18 +23,19 @@ line level    source
   12   1              ET0 = 1;                //打开IE-ET0，TIM0中断
   13   1      }
   14          
-  15          void Timer1_Init(void)          //10毫秒@11.0592MHz
+  15          void Timer1_Init(void)          //1毫秒@11.0592MHz
   16          {
-  17   1              AUXR &= 0xBF;                   //定时器时钟12T模式
-  18   1              TMOD &= 0x0F;                   //设置定时器模式
-  19   1              TL1   = 0x00;                           //设置定时初始值
-  20   1              TH1   = 0xDC;                           //设置定时初始值
-  21   1              TF1   = 0;                              //清除TF1标志
-  22   1              TR1   = 1;                              //定时器1开始计时
+  17   1          AUXR |= 0x40;                       //定时器时钟1T模式
+  18   1          TMOD &= 0x0F;                       //设置定时器模式
+  19   1          TL1 = 0xCD;                         //设置定时初始值
+  20   1          TH1 = 0xD4;                         //设置定时初始值
+  21   1          TF1 = 0;                            //清除TF1标志
+  22   1          TR1 = 1;                            //定时器1开始计时
   23   1      
   24   1          ET1   = 1;                //打开IE-ET1，TIM1中断
   25   1      }
   26          
+  27          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
