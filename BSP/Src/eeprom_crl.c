@@ -17,8 +17,8 @@ void eeprom_statu_judge( void )
    
     if( eeprom_statu_flag == 0xFF)
     {
-        eeprom.warning_time  = 5;          //011 011 11 pwm7、8默认开，3档风速
-        eeprom.stop_time     = 10;
+        eeprom.stop_time   = 1;
+        eeprom.delay_time  = 1;          //011 011 11 pwm7、8默认开，3档风速
         eeprom_data_record(); 
     }
     eeprom_data_init();    
@@ -35,9 +35,9 @@ void eeprom_data_record( void )
 {
     ISP_Earse(0x0000);
 
-    ISP_Write(WARNING_DELAY,eeprom.warning_time);
     ISP_Write(STOP_DELAY,eeprom.stop_time);
-
+    ISP_Write(WARNING_DELAY,eeprom.delay_time);
+    
     ISP_Write(EEPROM_STATU_JUDGE,0x58);
 }
 
@@ -51,9 +51,9 @@ void eeprom_data_record( void )
 **/
 void eeprom_data_init( void )
 {
-    eeprom.warning_time = ISP_Read(WARNING_DELAY);
-    level.motor_warning_delay = eeprom.warning_time * 100;
-
     eeprom.stop_time = ISP_Read(STOP_DELAY); 
-    level.motor_stop_delay = eeprom.stop_time * 100;
+    level.motor_stop_time = eeprom.stop_time * 100;
+
+    eeprom.delay_time = ISP_Read(WARNING_DELAY);
+    level.motor_delay_time = eeprom.delay_time * 100;
 }

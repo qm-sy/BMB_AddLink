@@ -1,11 +1,11 @@
-C51 COMPILER V9.60.7.0   LEVEL                                                             03/09/2025 16:42:17 PAGE 1   
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/12/2025 17:19:04 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE LEVEL
 OBJECT MODULE PLACED IN ..\Output\level.obj
-COMPILER INVOKED BY: D:\APP\Keil_STM32\C51\BIN\C51.EXE ..\BSP\Src\level.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\BSP\I
-                    -nc;..\Core\Inc;..\Drivers;..\Middlewares;..\Emembed\Inc;..\SYSTEM\Inc) DEBUG OBJECTEXTEND PRINT(.\Listings\level.lst) OB
-                    -JECT(..\Output\level.obj)
+COMPILER INVOKED BY: D:\APP\Keil_v5\C51\BIN\C51.EXE ..\BSP\Src\level.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\BSP\Inc;
+                    -..\Core\Inc;..\Drivers;..\Middlewares;..\Emembed\Inc;..\SYSTEM\Inc) DEBUG OBJECTEXTEND PRINT(.\Listings\level.lst) OBJEC
+                    -T(..\Output\level.obj)
 
 line level    source
 
@@ -18,573 +18,651 @@ line level    source
    7          {
    8   1          level.level1_allow_flag   = 1;
    9   1          level.motor1_start_flag   = 0;          
-  10   1          level.motor1_warning_flag = 0;     
-  11   1          level.motor1_warning_cnt  = 0;
-  12   1          level.motor1_stop_cnt     = 0;
-  13   1      
-  14   1          level.level2_allow_flag   = 1;
-  15   1          level.motor2_start_flag   = 0;          
-  16   1          level.motor2_warning_flag = 0;     
-  17   1          level.motor2_warning_cnt  = 0;
-  18   1          level.motor2_stop_cnt     = 0;
-  19   1      
-  20   1      
-  21   1          level.level3_allow_flag   = 1;
-  22   1          level.motor3_start_flag   = 0;          
-  23   1          level.motor3_warning_flag = 0;     
-  24   1          level.motor3_warning_cnt  = 0;
-  25   1          level.motor3_stop_cnt     = 0;
-  26   1      
-  27   1      
-  28   1          level.level4_allow_flag   = 1;
-  29   1          level.motor4_start_flag   = 0;          
-  30   1          level.motor4_warning_flag = 0;     
-  31   1          level.motor4_warning_cnt  = 0;
-  32   1          level.motor4_stop_cnt     = 0;
-  33   1      
-  34   1      
-  35   1          level.level5_allow_flag   = 1;
-  36   1          level.motor5_start_flag   = 0;          
-  37   1          level.motor5_warning_flag = 0;     
-  38   1          level.motor5_warning_cnt  = 0;
-  39   1          level.motor5_stop_cnt     = 0;
-  40   1      
-  41   1          level.level6_allow_flag   = 1;
-  42   1          level.motor6_start_flag   = 0;          
-  43   1          level.motor6_warning_flag = 0;     
-  44   1          level.motor6_warning_cnt  = 0;
-  45   1          level.motor6_stop_cnt     = 0;
-  46   1      }
-  47          
-  48          
-  49          void speak_param_init( void )
-  50          {
-  51   1          speak.buzzer_start_flag = 0;
-  52   1          speak.buzzer_runing_cnt = 0;
-  53   1          speak.buzzer_statu      = 0;
-C51 COMPILER V9.60.7.0   LEVEL                                                             03/09/2025 16:42:17 PAGE 2   
+  10   1          level.motor1_delay_flag = 0;     
+  11   1          level.motor1_stop_cnt  = 0;
+  12   1          level.motor1_delay_cnt     = 0;
+  13   1          level.motor1_warning_flag = 0;
+  14   1      
+  15   1          level.level2_allow_flag   = 1;
+  16   1          level.motor2_start_flag   = 0;          
+  17   1          level.motor2_delay_flag = 0;     
+  18   1          level.motor2_delay_cnt  = 0;
+  19   1          level.motor2_stop_cnt     = 0;
+  20   1          level.motor2_warning_flag = 0;
+  21   1      
+  22   1          level.level3_allow_flag   = 1;
+  23   1          level.motor3_start_flag   = 0;          
+  24   1          level.motor3_delay_flag = 0;     
+  25   1          level.motor3_delay_cnt  = 0;
+  26   1          level.motor3_stop_cnt     = 0;
+  27   1          level.motor3_warning_flag = 0;
+  28   1      
+  29   1          level.level4_allow_flag   = 1;
+  30   1          level.motor4_start_flag   = 0;          
+  31   1          level.motor4_delay_flag = 0;     
+  32   1          level.motor4_delay_cnt  = 0;
+  33   1          level.motor4_stop_cnt     = 0;
+  34   1          level.motor4_warning_flag = 0;
+  35   1      
+  36   1          level.level5_allow_flag   = 1;
+  37   1          level.motor5_start_flag   = 0;          
+  38   1          level.motor5_delay_flag = 0;     
+  39   1          level.motor5_delay_cnt  = 0;
+  40   1          level.motor5_stop_cnt     = 0;
+  41   1          level.motor5_warning_flag = 0;
+  42   1      
+  43   1          level.level6_allow_flag   = 1;
+  44   1          level.motor6_start_flag   = 0;          
+  45   1          level.motor6_delay_flag = 0;     
+  46   1          level.motor6_delay_cnt  = 0;
+  47   1          level.motor6_stop_cnt     = 0;
+  48   1          level.motor6_warning_flag = 0;
+  49   1      }
+  50          
+  51          
+  52          void speak_param_init( void )
+  53          {
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/12/2025 17:19:04 PAGE 2   
 
-  54   1      }
-  55          
-  56          void motor_init( void )
-  57          {
-  58   1          MOTOR1 = MOTOR_OFF;
-  59   1          MOTOR2 = MOTOR_OFF;
-  60   1          MOTOR3 = MOTOR_OFF;
-  61   1          MOTOR4 = MOTOR_OFF;
-  62   1          MOTOR5 = MOTOR_OFF;
-  63   1          MOTOR6 = MOTOR_OFF;
-  64   1      
-  65   1          INK_OUT       = MOTOR_OFF;
-  66   1          INK_OVERFLOW  = MOTOR_OFF;
-  67   1      }
-  68          
-  69          void level_statu( void )
-  70          {
-  71   1          level1_scan();
-  72   1          level2_scan();
-  73   1          level3_scan();
-  74   1          level4_scan();
-  75   1          level5_scan();
-  76   1          level6_scan();
-  77   1          
-  78   1          if( level.motor1_warning_flag | level.motor2_warning_flag | level.motor3_warning_flag    \
-  79   1              |level.motor4_warning_flag | level.motor5_warning_flag | level.motor6_warning_flag == 1 )   
-  80   1              {
-  81   2                   speak.buzzer_start_flag = 1;
-  82   2              }
-  83   1      }
-  84          
-  85          
-  86          void level1_scan( void )
-  87          {
-  88   1          if( LEVEL1_H == 1 ) //上浮球处于高位
-  89   1          {
-  90   2              /*  未知原因导致墨水溢出 电机停止并报警  */
-  91   2              INK_OVERFLOW = 1;
-  92   2      
-  93   2              MOTOR1 = MOTOR_OFF;
-  94   2      
-  95   2              speak.buzzer_start_flag = 1;
+  54   1          speak.buzzer_start_flag = 0;
+  55   1          speak.buzzer_runing_cnt = 0;
+  56   1          speak.buzzer_statu      = 0;
+  57   1      }
+  58          
+  59          void motor_init( void )
+  60          {
+  61   1          MOTOR1 = MOTOR_OFF;
+  62   1          MOTOR2 = MOTOR_OFF;
+  63   1          MOTOR3 = MOTOR_OFF;
+  64   1          MOTOR4 = MOTOR_OFF;
+  65   1          MOTOR5 = MOTOR_OFF;
+  66   1          MOTOR6 = MOTOR_OFF;
+  67   1      
+  68   1          level.ink_warning_flag   = 0;
+  69   1          level.ink_overflow_flag  = 0;
+  70   1      }
+  71          
+  72          void level_statu( void )
+  73          {
+  74   1          level1_scan();
+  75   1          level2_scan();
+  76   1          level3_scan();
+  77   1          level4_scan();
+  78   1          level5_scan();
+  79   1          level6_scan();
+  80   1          
+  81   1          if( level.motor1_warning_flag | level.motor2_warning_flag | level.motor3_warning_flag    \
+  82   1              |level.motor4_warning_flag | level.motor5_warning_flag | level.motor6_warning_flag == 1 )   
+  83   1              {
+  84   2                   speak.buzzer_start_flag = 1;
+  85   2                   level.ink_warning_flag = 1;
+  86   2              }
+  87   1      }
+  88          
+  89          
+  90          void level1_scan( void )
+  91          {
+  92   1          if( LEVEL1_H == 0 ) //上浮球处于高位
+  93   1          {
+  94   2              /*  未知原因导致墨水溢出 电机停止并报警  */
+  95   2              level.ink_overflow_flag  = 1;
   96   2      
-  97   2              level.level1_allow_flag = 0;
-  98   2              level.motor1_start_flag = 0;
-  99   2          }else 
- 100   1          {
- 101   2              if( level.level1_allow_flag == 1 )
- 102   2              {
- 103   3                  if( LEVEL1_L == 0 )
- 104   3                  {
- 105   4                      /*  下浮球下落，电机启动,定时器开始计时    */
- 106   4                      MOTOR1 = MOTOR_ON;
- 107   4                      level.level1_allow_flag = 0;
- 108   4          
- 109   4                      level.motor1_warning_cnt = 0;
- 110   4                      level.motor1_stop_cnt    = 0;
- 111   4                      level.motor1_start_flag  = 1;
- 112   4                  }
- 113   3              }
- 114   2          }
- 115   1      }
-C51 COMPILER V9.60.7.0   LEVEL                                                             03/09/2025 16:42:17 PAGE 3   
+  97   2              MOTOR1 = MOTOR_OFF;
+  98   2      
+  99   2              speak.buzzer_start_flag = 1;
+ 100   2      
+ 101   2              level.level1_allow_flag = 0;
+ 102   2              level.motor1_start_flag = 0;
+ 103   2          }else 
+ 104   1          {
+ 105   2              if( level.level1_allow_flag == 1 )
+ 106   2              {
+ 107   3                  if( LEVEL1_L == 0 )
+ 108   3                  {
+ 109   4                      /*  下浮球下落，电机启动,定时器开始计时    */
+ 110   4                      MOTOR1 = MOTOR_ON;
+ 111   4                      level.level1_allow_flag = 0;
+ 112   4          
+ 113   4                      level.motor1_stop_cnt = 0;
+ 114   4                      level.motor1_delay_cnt    = 0;
+ 115   4                      level.motor1_start_flag  = 1;
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/12/2025 17:19:04 PAGE 3   
 
- 116          
- 117          void level2_scan( void )
- 118          {
- 119   1          if( LEVEL2_H == 1 ) //上浮球处于高位
- 120   1          {
- 121   2              /*  未知原因导致墨水溢出 电机停止并报警  */
- 122   2              INK_OVERFLOW = 1;
- 123   2      
- 124   2              MOTOR2 = MOTOR_OFF;
- 125   2      
- 126   2              speak.buzzer_start_flag = 1;
+ 116   4                  }
+ 117   3              }
+ 118   2          }
+ 119   1      }
+ 120          
+ 121          void level2_scan( void )
+ 122          {
+ 123   1          if( LEVEL2_H == 0 ) //上浮球处于高位
+ 124   1          {
+ 125   2              /*  未知原因导致墨水溢出 电机停止并报警  */
+ 126   2              level.ink_overflow_flag  = 1;
  127   2      
- 128   2              level.level2_allow_flag = 0;
- 129   2              level.motor2_start_flag = 0;
- 130   2          }else 
- 131   1          {
- 132   2              if( level.level2_allow_flag == 1 )
- 133   2              {
- 134   3                  if( LEVEL2_L == 0 )
- 135   3                  {
- 136   4                      /*  下浮球下落，电机启动,定时器开始计时    */
- 137   4                      MOTOR2 = MOTOR_ON;
- 138   4                      level.level2_allow_flag = 0;
- 139   4          
- 140   4                      level.motor2_warning_cnt = 0;
- 141   4                      level.motor2_stop_cnt    = 0;
- 142   4                      level.motor2_start_flag  = 1;
- 143   4                  }
- 144   3              }
- 145   2          }
- 146   1      }
- 147          
- 148          void level3_scan( void )
- 149          {
- 150   1          if( LEVEL3_H == 1 ) //上浮球处于高位
- 151   1          {
- 152   2              /*  未知原因导致墨水溢出 电机停止并报警  */
- 153   2              INK_OVERFLOW = 1;
- 154   2      
- 155   2              MOTOR3 = MOTOR_OFF;
- 156   2      
- 157   2              speak.buzzer_start_flag = 1;
+ 128   2              MOTOR2 = MOTOR_OFF;
+ 129   2      
+ 130   2              speak.buzzer_start_flag = 1;
+ 131   2      
+ 132   2              level.level2_allow_flag = 0;
+ 133   2              level.motor2_start_flag = 0;
+ 134   2          }else 
+ 135   1          {
+ 136   2              if( level.level2_allow_flag == 1 )
+ 137   2              {
+ 138   3                  if( LEVEL2_L == 0 )
+ 139   3                  {
+ 140   4                      /*  下浮球下落，电机启动,定时器开始计时    */
+ 141   4                      MOTOR2 = MOTOR_ON;
+ 142   4                      level.level2_allow_flag = 0;
+ 143   4          
+ 144   4                      level.motor2_delay_cnt = 0;
+ 145   4                      level.motor2_stop_cnt    = 0;
+ 146   4                      level.motor2_start_flag  = 1;
+ 147   4                  }
+ 148   3              }
+ 149   2          }
+ 150   1      }
+ 151          
+ 152          void level3_scan( void )
+ 153          {
+ 154   1          if( LEVEL3_H == 0 ) //上浮球处于高位
+ 155   1          {
+ 156   2              /*  未知原因导致墨水溢出 电机停止并报警  */
+ 157   2              level.ink_overflow_flag  = 1;
  158   2      
- 159   2              level.level3_allow_flag = 0;
- 160   2              level.motor3_start_flag = 0;
- 161   2          }else 
- 162   1          {
- 163   2              if( level.level3_allow_flag == 1 )
- 164   2              {
- 165   3                  if( LEVEL3_L == 0 )
- 166   3                  {
- 167   4                      /*  下浮球下落，电机启动,定时器开始计时    */
- 168   4                      MOTOR3 = MOTOR_ON;
- 169   4                      level.level3_allow_flag = 0;
- 170   4          
- 171   4                      level.motor3_warning_cnt = 0;
- 172   4                      level.motor3_stop_cnt    = 0;
- 173   4                      level.motor3_start_flag  = 1;
- 174   4                  }
- 175   3              }
- 176   2          }
- 177   1      }
-C51 COMPILER V9.60.7.0   LEVEL                                                             03/09/2025 16:42:17 PAGE 4   
+ 159   2              MOTOR3 = MOTOR_OFF;
+ 160   2      
+ 161   2              speak.buzzer_start_flag = 1;
+ 162   2      
+ 163   2              level.level3_allow_flag = 0;
+ 164   2              level.motor3_start_flag = 0;
+ 165   2          }else 
+ 166   1          {
+ 167   2              if( level.level3_allow_flag == 1 )
+ 168   2              {
+ 169   3                  if( LEVEL3_L == 0 )
+ 170   3                  {
+ 171   4                      /*  下浮球下落，电机启动,定时器开始计时    */
+ 172   4                      MOTOR3 = MOTOR_ON;
+ 173   4                      level.level3_allow_flag = 0;
+ 174   4          
+ 175   4                      level.motor3_delay_cnt = 0;
+ 176   4                      level.motor3_stop_cnt    = 0;
+ 177   4                      level.motor3_start_flag  = 1;
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/12/2025 17:19:04 PAGE 4   
 
- 178          
- 179          void level4_scan( void )
- 180          {
- 181   1          if( LEVEL4_H == 1 ) //上浮球处于高位
- 182   1          {
- 183   2              /*  未知原因导致墨水溢出 电机停止并报警  */
- 184   2              INK_OVERFLOW = 1;
- 185   2      
- 186   2              MOTOR4 = MOTOR_OFF;
- 187   2      
- 188   2              speak.buzzer_start_flag = 1;
+ 178   4                  }
+ 179   3              }
+ 180   2          }
+ 181   1      }
+ 182          
+ 183          void level4_scan( void )
+ 184          {
+ 185   1          if( LEVEL4_H == 0 ) //上浮球处于高位
+ 186   1          {
+ 187   2              /*  未知原因导致墨水溢出 电机停止并报警  */
+ 188   2              level.ink_overflow_flag  = 1;
  189   2      
- 190   2              level.level4_allow_flag = 0;
- 191   2              level.motor4_start_flag = 0;
- 192   2          }else 
- 193   1          {
- 194   2              if( level.level4_allow_flag == 1 )
- 195   2              {
- 196   3                  if( LEVEL4_L == 0 )
- 197   3                  {
- 198   4                      /*  下浮球下落，电机启动,定时器开始计时    */
- 199   4                      MOTOR4 = MOTOR_ON;
- 200   4                      level.level4_allow_flag = 0;
- 201   4          
- 202   4                      level.motor4_warning_cnt = 0;
- 203   4                      level.motor4_stop_cnt    = 0;
- 204   4                      level.motor4_start_flag  = 1;
- 205   4                  }
- 206   3              }
- 207   2          }
- 208   1      }
- 209          
- 210          void level5_scan( void )
- 211          {
- 212   1          if( LEVEL5_H == 1 ) //上浮球处于高位
- 213   1          {
- 214   2              /*  未知原因导致墨水溢出 电机停止并报警  */
- 215   2              INK_OVERFLOW = 1;
- 216   2      
- 217   2              MOTOR5 = MOTOR_OFF;
- 218   2      
- 219   2              speak.buzzer_start_flag = 1;
+ 190   2              MOTOR4 = MOTOR_OFF;
+ 191   2      
+ 192   2              speak.buzzer_start_flag = 1;
+ 193   2      
+ 194   2              level.level4_allow_flag = 0;
+ 195   2              level.motor4_start_flag = 0;
+ 196   2          }else 
+ 197   1          {
+ 198   2              if( level.level4_allow_flag == 1 )
+ 199   2              {
+ 200   3                  if( LEVEL4_L == 0 )
+ 201   3                  {
+ 202   4                      /*  下浮球下落，电机启动,定时器开始计时    */
+ 203   4                      MOTOR4 = MOTOR_ON;
+ 204   4                      level.level4_allow_flag = 0;
+ 205   4          
+ 206   4                      level.motor4_delay_cnt = 0;
+ 207   4                      level.motor4_stop_cnt    = 0;
+ 208   4                      level.motor4_start_flag  = 1;
+ 209   4                  }
+ 210   3              }
+ 211   2          }
+ 212   1      }
+ 213          
+ 214          void level5_scan( void )
+ 215          {
+ 216   1          if( LEVEL5_H == 0 ) //上浮球处于高位
+ 217   1          {
+ 218   2              /*  未知原因导致墨水溢出 电机停止并报警  */
+ 219   2              level.ink_overflow_flag  = 1;
  220   2      
- 221   2              level.level5_allow_flag = 0;
- 222   2              level.motor5_start_flag = 0;
- 223   2          }else 
- 224   1          {
- 225   2              if( level.level5_allow_flag == 1 )
- 226   2              {
- 227   3                  if( LEVEL5_L == 0 )
- 228   3                  {
- 229   4                      /*  下浮球下落，电机启动,定时器开始计时    */
- 230   4                      MOTOR5 = MOTOR_ON;
- 231   4                      level.level5_allow_flag = 0;
- 232   4          
- 233   4                      level.motor5_warning_cnt = 0;
- 234   4                      level.motor5_stop_cnt    = 0;
- 235   4                      level.motor5_start_flag  = 1;
- 236   4                  }
- 237   3              }
- 238   2          }
- 239   1      }
-C51 COMPILER V9.60.7.0   LEVEL                                                             03/09/2025 16:42:17 PAGE 5   
+ 221   2              MOTOR5 = MOTOR_OFF;
+ 222   2      
+ 223   2              speak.buzzer_start_flag = 1;
+ 224   2      
+ 225   2              level.level5_allow_flag = 0;
+ 226   2              level.motor5_start_flag = 0;
+ 227   2          }else 
+ 228   1          {
+ 229   2              if( level.level5_allow_flag == 1 )
+ 230   2              {
+ 231   3                  if( LEVEL5_L == 0 )
+ 232   3                  {
+ 233   4                      /*  下浮球下落，电机启动,定时器开始计时    */
+ 234   4                      MOTOR5 = MOTOR_ON;
+ 235   4                      level.level5_allow_flag = 0;
+ 236   4          
+ 237   4                      level.motor5_delay_cnt = 0;
+ 238   4                      level.motor5_stop_cnt    = 0;
+ 239   4                      level.motor5_start_flag  = 1;
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/12/2025 17:19:04 PAGE 5   
 
- 240          
- 241          void level6_scan( void )
- 242          {
- 243   1          if( LEVEL6_H == 1 ) //上浮球处于高位
- 244   1          {
- 245   2              /*  未知原因导致墨水溢出 电机停止并报警  */
- 246   2              INK_OVERFLOW = 1;
- 247   2      
- 248   2              MOTOR6 = MOTOR_OFF;
- 249   2      
- 250   2              speak.buzzer_start_flag = 1;
+ 240   4                  }
+ 241   3              }
+ 242   2          }
+ 243   1      }
+ 244          
+ 245          void level6_scan( void )
+ 246          {
+ 247   1          if( LEVEL6_H == 0 ) //上浮球处于高位
+ 248   1          {
+ 249   2              /*  未知原因导致墨水溢出 电机停止并报警  */
+ 250   2              level.ink_overflow_flag  = 1;
  251   2      
- 252   2              level.level6_allow_flag = 0;
- 253   2              level.motor6_start_flag = 0;
- 254   2          }else 
- 255   1          {
- 256   2              if( level.level6_allow_flag == 1 )
- 257   2              {
- 258   3                  if( LEVEL6_L == 0 )
- 259   3                  {
- 260   4                      /*  下浮球下落，电机启动,定时器开始计时    */
- 261   4                      MOTOR6 = MOTOR_ON;
- 262   4                      level.level6_allow_flag = 0;
- 263   4          
- 264   4                      level.motor6_warning_cnt = 0;
- 265   4                      level.motor6_stop_cnt    = 0;
- 266   4                      level.motor6_start_flag  = 1;
- 267   4                  }
- 268   3              }
- 269   2          }
- 270   1      }
- 271          
- 272          
- 273          void key_reset( void )
- 274          {
- 275   1          while ( RESET == 0 )
- 276   1          {
- 277   2              delay_ms(100);
- 278   2              if( RESET == 0 )
- 279   2              {
- 280   3                  MOTOR1 = MOTOR_OFF;
- 281   3                  MOTOR2 = MOTOR_OFF;
- 282   3                  MOTOR3 = MOTOR_OFF;
- 283   3                  MOTOR4 = MOTOR_OFF;
- 284   3                  MOTOR5 = MOTOR_OFF;
- 285   3                  MOTOR6 = MOTOR_OFF;
- 286   3      
- 287   3                  buzzer = BUZZER_OFF;
- 288   3                  speak.buzzer_start_flag = 0;
- 289   3                  INK_OVERFLOW = 0;
- 290   3                  INK_OUT      = 0;
- 291   3          
- 292   3                  level.level1_allow_flag    = 1;
- 293   3                  level.motor1_warning_flag  = 0;
- 294   3      
- 295   3                  level.level2_allow_flag    = 1;
- 296   3                  level.motor2_warning_flag  = 0;
- 297   3      
- 298   3                  level.level3_allow_flag    = 1;
- 299   3                  level.motor3_warning_flag  = 0;
- 300   3      
- 301   3                  level.level4_allow_flag    = 1;
-C51 COMPILER V9.60.7.0   LEVEL                                                             03/09/2025 16:42:17 PAGE 6   
+ 252   2              MOTOR6 = MOTOR_OFF;
+ 253   2      
+ 254   2              speak.buzzer_start_flag = 1;
+ 255   2      
+ 256   2              level.level6_allow_flag = 0;
+ 257   2              level.motor6_start_flag = 0;
+ 258   2          }else 
+ 259   1          {
+ 260   2              if( level.level6_allow_flag == 1 )
+ 261   2              {
+ 262   3                  if( LEVEL6_L == 0 )
+ 263   3                  {
+ 264   4                      /*  下浮球下落，电机启动,定时器开始计时    */
+ 265   4                      MOTOR6 = MOTOR_ON;
+ 266   4                      level.level6_allow_flag = 0;
+ 267   4          
+ 268   4                      level.motor6_delay_cnt = 0;
+ 269   4                      level.motor6_stop_cnt    = 0;
+ 270   4                      level.motor6_start_flag  = 1;
+ 271   4                  }
+ 272   3              }
+ 273   2          }
+ 274   1      }
+ 275          
+ 276          
+ 277          void key_reset( void )
+ 278          {
+ 279   1          while ( RESET == 0 )
+ 280   1          {
+ 281   2              delay_ms(100);
+ 282   2              if( RESET == 0 )
+ 283   2              {
+ 284   3                  MOTOR1 = MOTOR_OFF;
+ 285   3                  MOTOR2 = MOTOR_OFF;
+ 286   3                  MOTOR3 = MOTOR_OFF;
+ 287   3                  MOTOR4 = MOTOR_OFF;
+ 288   3                  MOTOR5 = MOTOR_OFF;
+ 289   3                  MOTOR6 = MOTOR_OFF;
+ 290   3      
+ 291   3                  buzzer = BUZZER_OFF;
+ 292   3                  speak.buzzer_start_flag = 0;
+ 293   3                  level.ink_warning_flag   = 0;
+ 294   3                  level.ink_overflow_flag  = 0;
+ 295   3          
+ 296   3                  level.level1_allow_flag    = 1;
+ 297   3                  level.motor1_warning_flag  = 0;
+ 298   3      
+ 299   3                  level.level2_allow_flag    = 1;
+ 300   3                  level.motor2_warning_flag  = 0;
+ 301   3      
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/12/2025 17:19:04 PAGE 6   
 
- 302   3                  level.motor4_warning_flag  = 0;
- 303   3      
- 304   3                  level.level5_allow_flag    = 1;
- 305   3                  level.motor5_warning_flag  = 0;
- 306   3      
- 307   3                  level.level6_allow_flag    = 1;
- 308   3                  level.motor6_warning_flag  = 0;
- 309   3              }
- 310   2          }
- 311   1      }
- 312          
- 313          
- 314          void Tim0Isr(void) interrupt 1 
- 315          {
- 316   1         /*  levle1 补墨并计时    */
- 317   1         if( level.motor1_start_flag == 1 )
- 318   1         {
- 319   2             if( LEVEL1_L == 0 )     //下浮球处于低位，开始补墨并计时t1
- 320   2             {
- 321   3                 level.motor1_warning_cnt++;
- 322   3      
- 323   3                 /*  1.如果t1时间后下浮球仍处于低位  */
- 324   3                 if( level.motor1_warning_cnt >= level.motor_warning_delay )
- 325   3                 {
- 326   4                     /*  2.判断为墨桶缺墨，发出报警  */
- 327   4                     INK_OUT = 1;
- 328   4      
- 329   4                     MOTOR1 = MOTOR_OFF;
- 330   4      
- 331   4                     level.motor1_warning_flag = 1;
- 332   4                     level.motor1_start_flag   = 0;
- 333   4                 }
- 334   3             }else                   //下浮球处于低位，开始补墨并计时t2
- 335   2             {
- 336   3                 level.motor1_stop_cnt++;
- 337   3      
- 338   3                 /*  1.t2补墨时间到  */
- 339   3                 if( level.motor1_stop_cnt >= level.motor_stop_delay )
- 340   3                 {
- 341   4                     /*  2.电机停止  */
- 342   4                     MOTOR1 = MOTOR_OFF;
- 343   4      
- 344   4                     level.motor1_start_flag  = 0;
- 345   4                     level.level1_allow_flag  = 1;
- 346   4                 }
- 347   3             }
- 348   2         }
- 349   1      
- 350   1         /*  levle2 补墨并计时    */
- 351   1         if( level.motor2_start_flag == 1 )
- 352   1         {
- 353   2             if( LEVEL2_L == 0 )     //下浮球处于低位，开始补墨并计时t1
- 354   2             {
- 355   3                 level.motor2_warning_cnt++;
- 356   3      
- 357   3                 /*  1.如果t1时间后下浮球仍处于低位  */
- 358   3                 if( level.motor2_warning_cnt >= level.motor_warning_delay )
- 359   3                 {
- 360   4                     /*  2.判断为墨桶缺墨，发出报警  */
- 361   4                     INK_OUT = 1;
- 362   4      
- 363   4                     MOTOR2 = MOTOR_OFF;
-C51 COMPILER V9.60.7.0   LEVEL                                                             03/09/2025 16:42:17 PAGE 7   
+ 302   3                  level.level3_allow_flag    = 1;
+ 303   3                  level.motor3_warning_flag  = 0;
+ 304   3      
+ 305   3                  level.level4_allow_flag    = 1;
+ 306   3                  level.motor4_warning_flag  = 0;
+ 307   3      
+ 308   3                  level.level5_allow_flag    = 1;
+ 309   3                  level.motor5_warning_flag  = 0;
+ 310   3      
+ 311   3                  level.level6_allow_flag    = 1;
+ 312   3                  level.motor6_warning_flag  = 0;
+ 313   3              }
+ 314   2          }
+ 315   1      }
+ 316          
+ 317          
+ 318          void Tim0Isr(void) interrupt 1 
+ 319          {
+ 320   1         /*  levle1 补墨并计时    */
+ 321   1         if( level.motor1_start_flag == 1 )
+ 322   1         {
+ 323   2              if( level.motor1_delay_flag == 0 )
+ 324   2              {
+ 325   3                  level.motor1_stop_cnt++;
+ 326   3                  if( level.motor1_stop_cnt >= level.motor_stop_time ) 
+ 327   3                  {
+ 328   4                      if( LEVEL1_L == 0 )
+ 329   4                      {
+ 330   5                          level.motor1_delay_flag = 1;
+ 331   5                          level.motor1_stop_cnt = 0;
+ 332   5                      }else
+ 333   4                      {
+ 334   5                          MOTOR1 = MOTOR_OFF;
+ 335   5                          level.motor1_start_flag = 0;
+ 336   5                          level.motor1_stop_cnt = 0;
+ 337   5                      }
+ 338   4                  }
+ 339   3              }else
+ 340   2              {
+ 341   3                  level.motor1_delay_cnt++;
+ 342   3                  if( level.motor1_delay_cnt >= level.motor_delay_time )
+ 343   3                  {
+ 344   4                      if( LEVEL1_L == 0 )
+ 345   4                      {
+ 346   5                          MOTOR1 = MOTOR_OFF;
+ 347   5                          level.motor1_start_flag = 0;
+ 348   5                          level.motor1_warning_flag  = 1;
+ 349   5                          level.motor1_delay_flag = 0;
+ 350   5                          level.motor1_delay_cnt  = 0;
+ 351   5                      }else
+ 352   4                      {
+ 353   5                          MOTOR1 = MOTOR_OFF;
+ 354   5                          level.motor1_start_flag = 0;
+ 355   5                          level.motor1_delay_flag = 0;
+ 356   5                          level.motor1_delay_cnt  = 0;
+ 357   5                      }
+ 358   4                  }
+ 359   3              }
+ 360   2         }
+ 361   1      
+ 362   1         /*  levle2 补墨并计时    */
+ 363   1         if( level.motor2_start_flag == 1 )
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/12/2025 17:19:04 PAGE 7   
 
- 364   4      
- 365   4                     level.motor2_warning_flag = 1;
- 366   4                     level.motor2_start_flag   = 0;
- 367   4                 }
- 368   3             }else                   //下浮球处于低位，开始补墨并计时t2
- 369   2             {
- 370   3                 level.motor2_stop_cnt++;
- 371   3      
- 372   3                 /*  1.t2补墨时间到  */
- 373   3                 if( level.motor2_stop_cnt >= level.motor_stop_delay )
- 374   3                 {
- 375   4                     /*  2.电机停止  */
- 376   4                     MOTOR2 = MOTOR_OFF;
- 377   4      
- 378   4                     level.motor2_start_flag  = 0;
- 379   4                     level.level2_allow_flag  = 1;
- 380   4                 }
- 381   3             }
- 382   2         }
- 383   1      
- 384   1         /*  levle3 补墨并计时    */
- 385   1         if( level.motor3_start_flag == 1 )
- 386   1         {
- 387   2             if( LEVEL3_L == 0 )     //下浮球处于低位，开始补墨并计时t1
- 388   2             {
- 389   3                 level.motor3_warning_cnt++;
- 390   3      
- 391   3                 /*  1.如果t1时间后下浮球仍处于低位  */
- 392   3                 if( level.motor3_warning_cnt >= level.motor_warning_delay )
- 393   3                 {
- 394   4                     /*  2.判断为墨桶缺墨，发出报警  */
- 395   4                     INK_OUT = 1;
- 396   4      
- 397   4                     MOTOR3 = MOTOR_OFF;
- 398   4      
- 399   4                     level.motor3_warning_flag = 1;
- 400   4                     level.motor3_start_flag   = 0;
- 401   4                 }
- 402   3             }else                   //下浮球处于低位，开始补墨并计时t2
- 403   2             {
- 404   3                 level.motor3_stop_cnt++;
- 405   3      
- 406   3                 /*  1.t2补墨时间到  */
- 407   3                 if( level.motor3_stop_cnt >= level.motor_stop_delay )
- 408   3                 {
- 409   4                     /*  2.电机停止  */
- 410   4                     MOTOR3 = MOTOR_OFF;
- 411   4      
- 412   4                     level.motor3_start_flag  = 0;
- 413   4                     level.level3_allow_flag  = 1;
- 414   4                 }
- 415   3             }
- 416   2         }
- 417   1      
- 418   1         /*  levle4 补墨并计时    */
- 419   1         if( level.motor4_start_flag == 1 )
- 420   1         {
- 421   2             if( LEVEL4_L == 0 )     //下浮球处于低位，开始补墨并计时t1
- 422   2             {
- 423   3                 level.motor4_warning_cnt++;
- 424   3      
- 425   3                 /*  1.如果t1时间后下浮球仍处于低位  */
-C51 COMPILER V9.60.7.0   LEVEL                                                             03/09/2025 16:42:17 PAGE 8   
+ 364   1         {
+ 365   2              if( level.motor2_delay_flag == 0 )
+ 366   2              {
+ 367   3                  level.motor2_stop_cnt++;
+ 368   3                  if( level.motor2_stop_cnt >= level.motor_stop_time ) 
+ 369   3                  {
+ 370   4                      if( LEVEL2_L == 0 )
+ 371   4                      {
+ 372   5                          level.motor2_delay_flag = 1;
+ 373   5                          level.motor2_stop_cnt = 0;
+ 374   5                      }else
+ 375   4                      {
+ 376   5                          MOTOR2 = MOTOR_OFF;
+ 377   5                          level.motor2_start_flag = 0;
+ 378   5                          level.motor2_stop_cnt = 0;
+ 379   5                      }
+ 380   4                  }
+ 381   3              }else
+ 382   2              {
+ 383   3                  level.motor2_delay_cnt++;
+ 384   3                  if( level.motor2_delay_cnt >= level.motor_delay_time )
+ 385   3                  {
+ 386   4                      if( LEVEL2_L == 0 )
+ 387   4                      {
+ 388   5                          MOTOR2 = MOTOR_OFF;
+ 389   5                          level.motor2_start_flag = 0;
+ 390   5                          level.motor2_warning_flag  = 1;
+ 391   5                          level.motor2_delay_flag = 0;
+ 392   5                          level.motor2_delay_cnt  = 0;
+ 393   5                      }else
+ 394   4                      {
+ 395   5                          MOTOR2 = MOTOR_OFF;
+ 396   5                          level.motor2_start_flag = 0;
+ 397   5                          level.motor2_delay_flag = 0;
+ 398   5                          level.motor2_delay_cnt  = 0;
+ 399   5                      }
+ 400   4                  }
+ 401   3              }
+ 402   2         }
+ 403   1      
+ 404   1         /*  levle3 补墨并计时    */
+ 405   1         if( level.motor3_start_flag == 1 )
+ 406   1         {
+ 407   2              if( level.motor3_delay_flag == 0 )
+ 408   2              {
+ 409   3                  level.motor3_stop_cnt++;
+ 410   3                  if( level.motor3_stop_cnt >= level.motor_stop_time ) 
+ 411   3                  {
+ 412   4                      if( LEVEL3_L == 0 )
+ 413   4                      {
+ 414   5                          level.motor3_delay_flag = 1;
+ 415   5                          level.motor3_stop_cnt = 0;
+ 416   5                      }else
+ 417   4                      {
+ 418   5                          MOTOR3 = MOTOR_OFF;
+ 419   5                          level.motor3_start_flag = 0;
+ 420   5                          level.motor3_stop_cnt = 0;
+ 421   5                      }
+ 422   4                  }
+ 423   3              }else
+ 424   2              {
+ 425   3                  level.motor3_delay_cnt++;
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/12/2025 17:19:04 PAGE 8   
 
- 426   3                 if( level.motor4_warning_cnt >= level.motor_warning_delay )
- 427   3                 {
- 428   4                     /*  2.判断为墨桶缺墨，发出报警  */
- 429   4                     INK_OUT = 1;
- 430   4      
- 431   4                     MOTOR4 = MOTOR_OFF;
- 432   4      
- 433   4                     level.motor4_warning_flag = 1;
- 434   4                     level.motor4_start_flag   = 0;
- 435   4                 }
- 436   3             }else                   //下浮球处于低位，开始补墨并计时t2
- 437   2             {
- 438   3                 level.motor4_stop_cnt++;
- 439   3      
- 440   3                 /*  1.t2补墨时间到  */
- 441   3                 if( level.motor4_stop_cnt >= level.motor_stop_delay )
- 442   3                 {
- 443   4                     /*  2.电机停止  */
- 444   4                     MOTOR4 = MOTOR_OFF;
- 445   4      
- 446   4                     level.motor4_start_flag  = 0;
- 447   4                     level.level4_allow_flag  = 1;
- 448   4                 }
- 449   3             }
- 450   2         }
- 451   1         
- 452   1         /*  levle5 补墨并计时    */
- 453   1         if( level.motor5_start_flag == 1 )
- 454   1         {
- 455   2             if( LEVEL5_L == 0 )     //下浮球处于低位，开始补墨并计时t1
- 456   2             {
- 457   3                 level.motor5_warning_cnt++;
- 458   3      
- 459   3                 /*  1.如果t1时间后下浮球仍处于低位  */
- 460   3                 if( level.motor5_warning_cnt >= level.motor_warning_delay )
- 461   3                 {
- 462   4                     /*  2.判断为墨桶缺墨，发出报警  */
- 463   4                     INK_OUT = 1;
- 464   4      
- 465   4                     MOTOR5 = MOTOR_OFF;
- 466   4      
- 467   4                     level.motor5_warning_flag = 1;
- 468   4                     level.motor5_start_flag   = 0;
- 469   4                 }
- 470   3             }else                   //下浮球处于低位，开始补墨并计时t2
- 471   2             {
- 472   3                 level.motor5_stop_cnt++;
- 473   3      
- 474   3                 /*  1.t2补墨时间到  */
- 475   3                 if( level.motor5_stop_cnt >= level.motor_stop_delay )
- 476   3                 {
- 477   4                     /*  2.电机停止  */
- 478   4                     MOTOR5 = MOTOR_OFF;
- 479   4      
- 480   4                     level.motor5_start_flag  = 0;
- 481   4                     level.level5_allow_flag  = 1;
- 482   4                 }
- 483   3             }
- 484   2         }
- 485   1      
- 486   1         /*  levle6 补墨并计时    */
- 487   1         if( level.motor6_start_flag == 1 )
-C51 COMPILER V9.60.7.0   LEVEL                                                             03/09/2025 16:42:17 PAGE 9   
+ 426   3                  if( level.motor3_delay_cnt >= level.motor_delay_time )
+ 427   3                  {
+ 428   4                      if( LEVEL3_L == 0 )
+ 429   4                      {
+ 430   5                          MOTOR3 = MOTOR_OFF;
+ 431   5                          level.motor3_start_flag = 0;
+ 432   5                          level.motor3_warning_flag  = 1;
+ 433   5                          level.motor3_delay_flag = 0;
+ 434   5                          level.motor3_delay_cnt  = 0;
+ 435   5                      }else
+ 436   4                      {
+ 437   5                          MOTOR3 = MOTOR_OFF;
+ 438   5                          level.motor3_start_flag = 0;
+ 439   5                          level.motor3_delay_flag = 0;
+ 440   5                          level.motor3_delay_cnt  = 0;
+ 441   5                      }
+ 442   4                  }
+ 443   3              }
+ 444   2         }
+ 445   1      
+ 446   1         /*  levle4 补墨并计时    */
+ 447   1         if( level.motor4_start_flag == 1 )
+ 448   1         {
+ 449   2              if( level.motor4_delay_flag == 0 )
+ 450   2              {
+ 451   3                  level.motor4_stop_cnt++;
+ 452   3                  if( level.motor4_stop_cnt >= level.motor_stop_time ) 
+ 453   3                  {
+ 454   4                      if( LEVEL4_L == 0 )
+ 455   4                      {
+ 456   5                          level.motor4_delay_flag = 1;
+ 457   5                          level.motor4_stop_cnt = 0;
+ 458   5                      }else
+ 459   4                      {
+ 460   5                          MOTOR4 = MOTOR_OFF;
+ 461   5                          level.motor4_start_flag = 0;
+ 462   5                          level.motor4_stop_cnt = 0;
+ 463   5                      }
+ 464   4                  }
+ 465   3              }else
+ 466   2              {
+ 467   3                  level.motor4_delay_cnt++;
+ 468   3                  if( level.motor4_delay_cnt >= level.motor_delay_time )
+ 469   3                  {
+ 470   4                      if( LEVEL4_L == 0 )
+ 471   4                      {
+ 472   5                          MOTOR4 = MOTOR_OFF;
+ 473   5                          level.motor4_start_flag = 0;
+ 474   5                          level.motor4_warning_flag  = 1;
+ 475   5                          level.motor4_delay_flag = 0;
+ 476   5                          level.motor4_delay_cnt  = 0;
+ 477   5                      }else
+ 478   4                      {
+ 479   5                          MOTOR4 = MOTOR_OFF;
+ 480   5                          level.motor4_start_flag = 0;
+ 481   5                          level.motor4_delay_flag = 0;
+ 482   5                          level.motor4_delay_cnt  = 0;
+ 483   5                      }
+ 484   4                  }
+ 485   3              }
+ 486   2         }
+ 487   1      
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/12/2025 17:19:04 PAGE 9   
 
- 488   1         {
- 489   2             if( LEVEL6_L == 0 )     //下浮球处于低位，开始补墨并计时t1
- 490   2             {
- 491   3                 level.motor6_warning_cnt++;
- 492   3      
- 493   3                 /*  1.如果t1时间后下浮球仍处于低位  */
- 494   3                 if( level.motor6_warning_cnt >= level.motor_warning_delay )
- 495   3                 {
- 496   4                     /*  2.判断为墨桶缺墨，发出报警  */
- 497   4                     INK_OUT = 1;
- 498   4      
- 499   4                     MOTOR6 = MOTOR_OFF;
- 500   4      
- 501   4                     level.motor6_warning_flag = 1;
- 502   4                     level.motor6_start_flag   = 0;
- 503   4                 }
- 504   3             }else                   //下浮球处于低位，开始补墨并计时t2
- 505   2             {
- 506   3                 level.motor6_stop_cnt++;
- 507   3      
- 508   3                 /*  1.t2补墨时间到  */
- 509   3                 if( level.motor6_stop_cnt >= level.motor_stop_delay )
- 510   3                 {
- 511   4                     /*  2.电机停止  */
- 512   4                     MOTOR6 = MOTOR_OFF;
- 513   4      
- 514   4                     level.motor6_start_flag  = 0;
- 515   4                     level.level6_allow_flag  = 1;
- 516   4                 }
- 517   3             }
- 518   2         }
- 519   1      }
- 520          
- 521          void Tim1Isr(void) interrupt 3 
- 522          {
- 523   1          if( speak.buzzer_start_flag == 1 )
- 524   1          {
- 525   2              speak.buzzer_runing_cnt++;
- 526   2              if( speak.buzzer_runing_cnt == 500 )
- 527   2              {
- 528   3                  speak.buzzer_runing_cnt = 0;
- 529   3                  speak.buzzer_statu = 1 - speak.buzzer_statu;
- 530   3                  buzzer = speak.buzzer_statu;
- 531   3              }
- 532   2          }else
- 533   1          {
- 534   2              speak.buzzer_runing_cnt = 0;
- 535   2          }
- 536   1      
- 537   1          /* 1, 如果接收未超时                                             */
- 538   1          if ( rs485.RX_rev_timeout != 0 )  
- 539   1          {
- 540   2              rs485.RX_rev_timeout--;
- 541   2              /* 2, 如果接收超时                                          */
- 542   2              if( rs485.RX_rev_timeout == 0 )  
- 543   2              {
- 544   3                  if( rs485.RX_rev_cnt > 0 )  
- 545   3                  {   
- 546   4                          /* 3, 接收完毕标志位亮起并初始化接收缓冲区         */
- 547   4                      rs485.RX_rev_end_Flag = 1;    
+ 488   1         /*  levle5 补墨并计时    */
+ 489   1         if( level.motor5_start_flag == 1 )
+ 490   1         {
+ 491   2              if( level.motor5_delay_flag == 0 )
+ 492   2              {
+ 493   3                  level.motor5_stop_cnt++;
+ 494   3                  if( level.motor5_stop_cnt >= level.motor_stop_time ) 
+ 495   3                  {
+ 496   4                      if( LEVEL5_L == 0 )
+ 497   4                      {
+ 498   5                          level.motor5_delay_flag = 1;
+ 499   5                          level.motor5_stop_cnt = 0;
+ 500   5                      }else
+ 501   4                      {
+ 502   5                          MOTOR5 = MOTOR_OFF;
+ 503   5                          level.motor5_start_flag = 0;
+ 504   5                          level.motor5_stop_cnt = 0;
+ 505   5                      }
+ 506   4                  }
+ 507   3              }else
+ 508   2              {
+ 509   3                  level.motor5_delay_cnt++;
+ 510   3                  if( level.motor5_delay_cnt >= level.motor_delay_time )
+ 511   3                  {
+ 512   4                      if( LEVEL5_L == 0 )
+ 513   4                      {
+ 514   5                          MOTOR5 = MOTOR_OFF;
+ 515   5                          level.motor5_start_flag = 0;
+ 516   5                          level.motor5_warning_flag  = 1;
+ 517   5                          level.motor5_delay_flag = 0;
+ 518   5                          level.motor5_delay_cnt  = 0;
+ 519   5                      }else
+ 520   4                      {
+ 521   5                          MOTOR5 = MOTOR_OFF;
+ 522   5                          level.motor5_start_flag = 0;
+ 523   5                          level.motor5_delay_flag = 0;
+ 524   5                          level.motor5_delay_cnt  = 0;
+ 525   5                      }
+ 526   4                  }
+ 527   3              }
+ 528   2         }
+ 529   1      
+ 530   1         /*  levle6 补墨并计时    */
+ 531   1         if( level.motor6_start_flag == 1 )
+ 532   1         {
+ 533   2              if( level.motor6_delay_flag == 0 )
+ 534   2              {
+ 535   3                  level.motor6_stop_cnt++;
+ 536   3                  if( level.motor6_stop_cnt >= level.motor_stop_time ) 
+ 537   3                  {
+ 538   4                      if( LEVEL6_L == 0 )
+ 539   4                      {
+ 540   5                          level.motor6_delay_flag = 1;
+ 541   5                          level.motor6_stop_cnt = 0;
+ 542   5                      }else
+ 543   4                      {
+ 544   5                          MOTOR6 = MOTOR_OFF;
+ 545   5                          level.motor6_start_flag = 0;
+ 546   5                          level.motor6_stop_cnt = 0;
+ 547   5                      }
  548   4                  }
- 549   3              }
-C51 COMPILER V9.60.7.0   LEVEL                                                             03/09/2025 16:42:17 PAGE 10  
+ 549   3              }else
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/12/2025 17:19:04 PAGE 10  
 
- 550   2          } 
- 551   1          
- 552   1      }
+ 550   2              {
+ 551   3                  level.motor6_delay_cnt++;
+ 552   3                  if( level.motor6_delay_cnt >= level.motor_delay_time )
+ 553   3                  {
+ 554   4                      if( LEVEL6_L == 0 )
+ 555   4                      {
+ 556   5                          MOTOR6 = MOTOR_OFF;
+ 557   5                          level.motor6_start_flag = 0;
+ 558   5                          level.motor6_warning_flag  = 1;
+ 559   5                          level.motor6_delay_flag = 0;
+ 560   5                          level.motor6_delay_cnt  = 0;
+ 561   5                      }else
+ 562   4                      {
+ 563   5                          MOTOR6 = MOTOR_OFF;
+ 564   5                          level.motor6_start_flag = 0;
+ 565   5                          level.motor6_delay_flag = 0;
+ 566   5                          level.motor6_delay_cnt  = 0;
+ 567   5                      }
+ 568   4                  }
+ 569   3              }
+ 570   2         }
+ 571   1      }
+ 572          
+ 573          void Tim1Isr(void) interrupt 3 
+ 574          {
+ 575   1          /* 1, 如果接收未超时                                             */
+ 576   1          if ( rs485.RX_rev_timeout != 0 )  
+ 577   1          {
+ 578   2              rs485.RX_rev_timeout--;
+ 579   2              /* 2, 如果接收超时                                          */
+ 580   2              if( rs485.RX_rev_timeout == 0 )  
+ 581   2              {
+ 582   3                  if( rs485.RX_rev_cnt > 0 )  
+ 583   3                  {   
+ 584   4                          /* 3, 接收完毕标志位亮起并初始化接收缓冲区         */
+ 585   4                      rs485.RX_rev_end_Flag = 1;    
+ 586   4                  }
+ 587   3              }
+ 588   2          } 
+ 589   1      
+ 590   1          if( speak.buzzer_start_flag == 1 )
+ 591   1          {
+ 592   2              speak.buzzer_runing_cnt++;
+ 593   2              if( speak.buzzer_runing_cnt == 500 )
+ 594   2              {
+ 595   3                  speak.buzzer_runing_cnt = 0;
+ 596   3                  speak.buzzer_statu = 1 - speak.buzzer_statu;
+ 597   3                  buzzer = speak.buzzer_statu;
+ 598   3              }
+ 599   2          }else
+ 600   1          {
+ 601   2              speak.buzzer_runing_cnt = 0;
+ 602   2          }
+ 603   1      
+ 604   1      
+ 605   1          if( level.ink_warning_flag == 1 )
+ 606   1          {
+ 607   2              level.ink_out_cnt ++;
+ 608   2              INK_OUT = 1;
+ 609   2              if( level.ink_out_cnt == 100 )
+ 610   2              {
+ 611   3                  INK_OUT = 0;
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/12/2025 17:19:04 PAGE 11  
+
+ 612   3                  level.ink_warning_flag = 0;
+ 613   3                  level.ink_out_cnt = 0;
+ 614   3              }
+ 615   2          }
+ 616   1      
+ 617   1          if( level.ink_overflow_flag == 1 )
+ 618   1          {
+ 619   2              level.ink_overflow_cnt ++;
+ 620   2              INK_OVERFLOW = 1;
+ 621   2              if( level.ink_overflow_cnt == 100 )
+ 622   2              {
+ 623   3                  INK_OVERFLOW = 0;
+ 624   3                  level.ink_overflow_flag = 0;  
+ 625   3                  level.ink_overflow_cnt = 0;
+ 626   3              }
+ 627   2          }
+ 628   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   1424    ----
+   CODE SIZE        =   1729    ----
    CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =     50    ----
+   XDATA SIZE       =     60    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----

@@ -13,47 +13,56 @@
 
 typedef struct 
 {
-    uint16_t    motor_warning_delay;
-    uint16_t    motor_stop_delay;
+    uint16_t    motor_stop_time;
+    uint16_t    motor_delay_time;
+
+    uint8_t    ink_warning_flag;
+    uint8_t    ink_out_cnt;
+    uint8_t    ink_overflow_flag;
+    uint8_t    ink_overflow_cnt;
 
     uint8_t     level1_allow_flag;
     uint8_t     motor1_start_flag;          
-    uint8_t     motor1_warning_flag;     
-    uint16_t    motor1_warning_cnt;
     uint16_t    motor1_stop_cnt;
+    uint8_t     motor1_delay_flag;    
+    uint16_t    motor1_delay_cnt;
+    uint8_t     motor1_warning_flag;    
+
 
     uint8_t     level2_allow_flag;
     uint8_t     motor2_start_flag;          
-    uint8_t     motor2_warning_flag;     
-    uint16_t    motor2_warning_cnt;
+    uint8_t     motor2_delay_flag;     
+    uint16_t    motor2_delay_cnt;
     uint16_t    motor2_stop_cnt;
-
+    uint8_t     motor2_warning_flag;  
 
     uint8_t     level3_allow_flag;
     uint8_t     motor3_start_flag;          
-    uint8_t     motor3_warning_flag;     
-    uint16_t    motor3_warning_cnt;
+    uint8_t     motor3_delay_flag;     
+    uint16_t    motor3_delay_cnt;
     uint16_t    motor3_stop_cnt;
-
+    uint8_t     motor3_warning_flag;  
     
     uint8_t     level4_allow_flag;
     uint8_t     motor4_start_flag;          
-    uint8_t     motor4_warning_flag;     
-    uint16_t    motor4_warning_cnt;
+    uint8_t     motor4_delay_flag;     
+    uint16_t    motor4_delay_cnt;
     uint16_t    motor4_stop_cnt;
-
+    uint8_t     motor4_warning_flag;  
     
     uint8_t     level5_allow_flag;
     uint8_t     motor5_start_flag;          
-    uint8_t     motor5_warning_flag;     
-    uint16_t    motor5_warning_cnt;
+    uint8_t     motor5_delay_flag;     
+    uint16_t    motor5_delay_cnt;
     uint16_t    motor5_stop_cnt;
+    uint8_t     motor5_warning_flag;  
 
     uint8_t     level6_allow_flag;
     uint8_t     motor6_start_flag;          
-    uint8_t     motor6_warning_flag;     
-    uint16_t    motor6_warning_cnt;
+    uint8_t     motor6_delay_flag;     
+    uint16_t    motor6_delay_cnt;
     uint16_t    motor6_stop_cnt;
+    uint8_t     motor6_warning_flag;  
 }LEVEL;
 
 typedef struct 

@@ -1,11 +1,11 @@
-C51 COMPILER V9.60.7.0   EEPROM_CRL                                                        03/09/2025 16:42:17 PAGE 1   
+C51 COMPILER V9.60.7.0   EEPROM_CRL                                                        03/12/2025 17:22:09 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE EEPROM_CRL
 OBJECT MODULE PLACED IN ..\Output\eeprom_crl.obj
-COMPILER INVOKED BY: D:\APP\Keil_STM32\C51\BIN\C51.EXE ..\BSP\Src\eeprom_crl.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\
-                    -BSP\Inc;..\Core\Inc;..\Drivers;..\Middlewares;..\Emembed\Inc;..\SYSTEM\Inc) DEBUG OBJECTEXTEND PRINT(.\Listings\eeprom_c
-                    -rl.lst) OBJECT(..\Output\eeprom_crl.obj)
+COMPILER INVOKED BY: D:\APP\Keil_v5\C51\BIN\C51.EXE ..\BSP\Src\eeprom_crl.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\BSP
+                    -\Inc;..\Core\Inc;..\Drivers;..\Middlewares;..\Emembed\Inc;..\SYSTEM\Inc) DEBUG OBJECTEXTEND PRINT(.\Listings\eeprom_crl.
+                    -lst) OBJECT(..\Output\eeprom_crl.obj)
 
 line level    source
 
@@ -28,8 +28,8 @@ line level    source
   17   1         
   18   1          if( eeprom_statu_flag == 0xFF)
   19   1          {
-  20   2              eeprom.warning_time  = 5;          //011 011 11 pwm7、8默认开，3档风速
-  21   2              eeprom.stop_time     = 10;
+  20   2              eeprom.stop_time   = 1;
+  21   2              eeprom.delay_time  = 1;          //011 011 11 pwm7、8默认开，3档风速
   22   2              eeprom_data_record(); 
   23   2          }
   24   1          eeprom_data_init();    
@@ -46,9 +46,9 @@ line level    source
   35          {
   36   1          ISP_Earse(0x0000);
   37   1      
-  38   1          ISP_Write(WARNING_DELAY,eeprom.warning_time);
-  39   1          ISP_Write(STOP_DELAY,eeprom.stop_time);
-  40   1      
+  38   1          ISP_Write(STOP_DELAY,eeprom.stop_time);
+  39   1          ISP_Write(WARNING_DELAY,eeprom.delay_time);
+  40   1          
   41   1          ISP_Write(EEPROM_STATU_JUDGE,0x58);
   42   1      }
   43          
@@ -62,13 +62,13 @@ line level    source
   51          **/
   52          void eeprom_data_init( void )
   53          {
-C51 COMPILER V9.60.7.0   EEPROM_CRL                                                        03/09/2025 16:42:17 PAGE 2   
+C51 COMPILER V9.60.7.0   EEPROM_CRL                                                        03/12/2025 17:22:09 PAGE 2   
 
-  54   1          eeprom.warning_time = ISP_Read(WARNING_DELAY);
-  55   1          level.motor_warning_delay = eeprom.warning_time * 100;
+  54   1          eeprom.stop_time = ISP_Read(STOP_DELAY); 
+  55   1          level.motor_stop_time = eeprom.stop_time * 100;
   56   1      
-  57   1          eeprom.stop_time = ISP_Read(STOP_DELAY); 
-  58   1          level.motor_stop_delay = eeprom.stop_time * 100;
+  57   1          eeprom.delay_time = ISP_Read(WARNING_DELAY);
+  58   1          level.motor_delay_time = eeprom.delay_time * 100;
   59   1      }
 
 

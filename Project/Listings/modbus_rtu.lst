@@ -1,11 +1,11 @@
-C51 COMPILER V9.60.7.0   MODBUS_RTU                                                        03/09/2025 16:42:18 PAGE 1   
+C51 COMPILER V9.60.7.0   MODBUS_RTU                                                        03/12/2025 17:19:05 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MODBUS_RTU
 OBJECT MODULE PLACED IN ..\Output\modbus_rtu.obj
-COMPILER INVOKED BY: D:\APP\Keil_STM32\C51\BIN\C51.EXE ..\Emembed\Src\modbus_rtu.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR
-                    -(..\BSP\Inc;..\Core\Inc;..\Drivers;..\Middlewares;..\Emembed\Inc;..\SYSTEM\Inc) DEBUG OBJECTEXTEND PRINT(.\Listings\modb
-                    -us_rtu.lst) OBJECT(..\Output\modbus_rtu.obj)
+COMPILER INVOKED BY: D:\APP\Keil_v5\C51\BIN\C51.EXE ..\Emembed\Src\modbus_rtu.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..
+                    -\BSP\Inc;..\Core\Inc;..\Drivers;..\Middlewares;..\Emembed\Inc;..\SYSTEM\Inc) DEBUG OBJECTEXTEND PRINT(.\Listings\modbus_
+                    -rtu.lst) OBJECT(..\Output\modbus_rtu.obj)
 
 line level    source
 
@@ -33,12 +33,12 @@ line level    source
   22   2              /*4.地址域校验通过，进入相应功能函数进行处理      */
   23   2              if( rs485.RX_buf[0] == MY_ADDR )
   24   2              {
-  25   3                  eeprom.warning_time = rs485.RX_buf[1];
-  26   3                  eeprom.stop_time    = rs485.RX_buf[2];
+  25   3                  eeprom.stop_time  = rs485.RX_buf[1];
+  26   3                  eeprom.delay_time = rs485.RX_buf[2];
   27   3                  eeprom_data_record();
   28   3      
-  29   3                  level.motor_warning_delay = eeprom.warning_time * 100;
-  30   3                  level.motor_stop_delay    = eeprom.stop_time    * 100;
+  29   3                  level.motor_stop_time  = eeprom.stop_time  * 100;
+  30   3                  level.motor_delay_time = eeprom.delay_time * 100;
   31   3                  
   32   3                  rs485.TX_buf[0] = 0xAA;
   33   3                  rs485.TX_buf[1] = 0xCC;

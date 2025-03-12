@@ -22,12 +22,12 @@ void Modbus_Event( void )
         /*4.地址域校验通过，进入相应功能函数进行处理      */
         if( rs485.RX_buf[0] == MY_ADDR )
         {
-            eeprom.warning_time = rs485.RX_buf[1];
-            eeprom.stop_time    = rs485.RX_buf[2];
+            eeprom.stop_time  = rs485.RX_buf[1];
+            eeprom.delay_time = rs485.RX_buf[2];
             eeprom_data_record();
 
-            level.motor_warning_delay = eeprom.warning_time * 100;
-            level.motor_stop_delay    = eeprom.stop_time    * 100;
+            level.motor_stop_time  = eeprom.stop_time  * 100;
+            level.motor_delay_time = eeprom.delay_time * 100;
             
             rs485.TX_buf[0] = 0xAA;
             rs485.TX_buf[1] = 0xCC;
