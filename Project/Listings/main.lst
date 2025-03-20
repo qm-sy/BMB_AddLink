@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              03/12/2025 17:19:04 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              03/20/2025 16:02:26 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -22,13 +22,13 @@ line level    source
   11   1          Uart1_Init();
   12   1          Uart1_Send_Statu_Init();
   13   1      
-  14   1      
+  14   1          motor_init();
   15   1          level_params_init();
   16   1          speak_param_init();
-  17   1          motor_init();
+  17   1          
   18   1      
   19   1          EA = 1;
-  20   1          eeprom_statu_judge();
+  20   1          //eeprom_statu_judge();
   21   1          printf("========== code start ========== \r\n");
   22   1      
   23   1          while (1)
@@ -36,13 +36,19 @@ line level    source
   25   2              level_statu();
   26   2              key_reset();
   27   2              Modbus_Event();
-  28   2          }  
-  29   1      }
+  28   2              
+  29   2              printf("The value of level.motor_stop_time is %d \r\n",(int)level.motor_stop_time);
+  30   2              printf("The value of level.motor_delay_time is %d \r\n",(int)level.motor_delay_time);
+  31   2              printf("The value of motor1_stop_cnt is %d \r\n",(int)level.motor1_stop_cnt);
+  32   2              printf("The value of motor1_delay_cnt is %d \r\n",(int)level.motor1_delay_cnt);
+  33   2              delay_ms(50);
+  34   2          }  
+  35   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     52    ----
-   CONSTANT SIZE    =     36    ----
+   CODE SIZE        =    152    ----
+   CONSTANT SIZE    =    202    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----

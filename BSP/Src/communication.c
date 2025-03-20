@@ -63,7 +63,7 @@ void Uart1_ISR() interrupt 4
             rs485.RX_rev_cnt++;
         }
         /* 6, 重置接收完毕判断时间                              */
-        rs485.RX_rev_timeout = 50;
+        rs485.RX_rev_timeout = 5;
     }
 }
 

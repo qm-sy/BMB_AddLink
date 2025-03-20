@@ -17,8 +17,8 @@ void eeprom_statu_judge( void )
    
     if( eeprom_statu_flag == 0xFF)
     {
-        eeprom.stop_time   = 1;
-        eeprom.delay_time  = 1;          //011 011 11 pwm7、8默认开，3档风速
+        eeprom.stop_time   = 180;
+        eeprom.delay_time  = 30;          //011 011 11 pwm7、8默认开，3档风速
         eeprom_data_record(); 
     }
     eeprom_data_init();    

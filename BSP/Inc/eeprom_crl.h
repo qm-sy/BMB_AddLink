@@ -12,8 +12,8 @@
 
 typedef struct 
 {
-    uint8_t  delay_time;
-    uint8_t  stop_time;            
+    uint16_t  delay_time;
+    uint16_t  stop_time;            
 }EEPROM_INFO;
 
 extern EEPROM_INFO eeprom;

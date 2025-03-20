@@ -15,6 +15,7 @@
         "modbus_rtu.h": "c",
         "communication.h": "c",
         "delay.h": "c",
-        "eeprom_crl.h": "c"
+        "eeprom_crl.h": "c",
+        "STRING.H": "cpp"
     }
 }
