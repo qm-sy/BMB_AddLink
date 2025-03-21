@@ -11,24 +11,29 @@
 #define BUZZER_ON   0
 #define BUZZER_OFF  1
 
-#define BALL_H_ON   0
-#define BALL_L_ON   1
+#define BALL_H_UP    0
+#define BALL_H_DOWN  1
 
-#define BALL_H_OFF  1
-#define BALL_L_OFF  0
+#define BALL_L_UP    1
+#define BALL_L_DOWN  0
+
+extern uint8_t level1_l, level2_l, level3_l, level4_l;
+extern uint8_t level1_h, level2_h, level3_h, level4_h;
 
 typedef struct 
 {
+    uint16_t    level1_h_cnt;
+    uint16_t    level2_h_cnt;
+    uint16_t    level3_h_cnt;
+    uint16_t    level4_h_cnt;
+
     uint16_t    motor_stop_time;
     uint16_t    motor_delay_time;
 
-    uint8_t    ink_out_flag;
-    uint8_t    ink_out_cnt;
     uint8_t    ink_overflow_flag;
     uint8_t    ink_overflow_cnt;
 
     uint8_t    ink_overflow_alarm;
-    uint8_t    ink_out_alarm;
 
     uint8_t     level1_allow_flag;
     uint8_t     motor1_start_flag;          
@@ -81,15 +86,7 @@ typedef struct
     uint8_t  buzzer_statu;
 }SPEAK;
 
-typedef struct 
-{
-    uint8_t  level1_h;
-    uint16_t level1_l;
-
-}BALL;
-
 extern LEVEL level;
-extern BALL ball;
 
 void level_params_init( void );
 void speak_param_init( void );
@@ -102,5 +99,6 @@ void level3_scan( void );
 void level4_scan( void );
 void level5_scan( void );
 void level6_scan( void );
+void get_ball_level( void );
 
 #endif

@@ -2,13 +2,19 @@
 
 LEVEL level;
 SPEAK speak;
-BALL ball;
-uint8_t level1_l, level2_l, level3_l, level4_l = BALL_L_ON;
-uint8_t level1_h, level2_h, level3_h, level4_h = BALL_H_OFF;
-uint8_t* level[8] = {&level1_l, &level1_h, &level2_l, &level2_h, &level3_l, &level3_h, &level4_l, &level4_h}; // arr[0] 存储a的地址
+uint8_t level1_l, level2_l = BALL_L_UP;
+uint8_t level3_l, level4_l = BALL_L_UP;
+uint8_t level1_h, level2_h = BALL_H_DOWN;
+uint8_t level3_h, level4_h = BALL_H_DOWN;
 
 void level_params_init( void )
 {
+    level.level1_h_cnt  = 0;
+    level.level2_h_cnt  = 0;
+    level.level3_h_cnt  = 0;
+    level.level4_h_cnt  = 0;
+
+
     level.motor_stop_time     = 18000;
     level.motor_delay_time    = 3000;
     level.level1_allow_flag   = 1;
@@ -57,6 +63,7 @@ void level_params_init( void )
 
 void speak_param_init( void )
 {
+    buzzer = BUZZER_OFF;
     speak.buzzer_start_flag = 0;
     speak.buzzer_runing_cnt = 0;
     speak.buzzer_statu      = 0;
@@ -71,8 +78,6 @@ void motor_init( void )
     MOTOR5 = MOTOR_OFF;
     MOTOR6 = MOTOR_OFF;
 
-    level.ink_out_flag   = 0;
-    level.ink_out_alarm = 0;
     level.ink_overflow_flag  = 0;
     level.ink_overflow_alarm = 0;
     INK_OUT = 0;
@@ -91,15 +96,12 @@ void key_reset( void )
             MOTOR2 = MOTOR_OFF;
             MOTOR3 = MOTOR_OFF;
             MOTOR4 = MOTOR_OFF;
-            buzzer = 1;
+            buzzer = BUZZER_OFF;
+            speak.buzzer_start_flag = 0;
             // MOTOR5 = MOTOR_OFF;
             // MOTOR6 = MOTOR_OFF;
             INK_OUT = 0;
-            
-           
-            level.ink_out_flag   = 0;
-            level.ink_out_alarm = 0;
-            level.ink_out_cnt = 0;
+
             level.ink_overflow_flag  = 0;
             level.ink_overflow_alarm = 0;
             level.ink_overflow_cnt = 0;
@@ -132,60 +134,172 @@ void level_statu( void )
     level2_scan();
     level3_scan();
     level4_scan();
-    level5_scan();
-    level6_scan();
     
-    if( level.motor1_warning_flag | level.motor2_warning_flag | level.motor3_warning_flag    \
-        |level.motor4_warning_flag == 1 )   
+    if( level.motor1_warning_flag | level.motor2_warning_flag       \
+      | level.motor3_warning_flag | level.motor4_warning_flag == 1 )   
     {
         INK_OUT = 1;
         speak.buzzer_start_flag = 1;
-        level.ink_out_flag = 1;
-
-    }else
-    {
-        if((LEVEL1_H != 0)&&(LEVEL2_H != 0)&&(LEVEL3_H != 0)&&(LEVEL4_H != 0))
-        {
-            //buzzer = 1;
-        }else
-        {
-            speak.buzzer_start_flag = 1;
-        }
-        
-    }     
+    }    
 }
 
 
 void level1_scan( void )
 {
-    if( LEVEL1_H != 1 ) //上浮球处于高位
+    if( level1_h == BALL_H_UP ) //上浮球处于高位
     {
+        level.level1_h_cnt++;
         /*  未知原因导致墨水溢出 电机停止并报警  */
-        level.ink_overflow_flag  = 1;
+        if( level.level1_h_cnt == 10 )
+        {
+            level.ink_overflow_flag  = 1;
 
-        MOTOR1 = MOTOR_OFF;
-        speak.buzzer_start_flag = 1;
-
-        level.level1_allow_flag = 0;
-        level.motor1_start_flag = 0;
+            MOTOR1 = MOTOR2 = MOTOR3 = MOTOR4 = MOTOR_OFF;
+            speak.buzzer_start_flag = 0;
+            buzzer = BUZZER_ON;
+    
+            level.level1_allow_flag = 0;
+            level.motor1_start_flag = 0;
+            level.level1_h_cnt = 0;
+        }
     }else 
     {
+        //level1_h_cnt = 0;
         if( level.level1_allow_flag == 1 )
         {
-            if( LEVEL1_L != 1 )
+            if( level1_l == BALL_L_DOWN )
             {
                 /*  下浮球下落，电机启动,定时器开始计时    */
                 MOTOR1 = MOTOR_ON;
                 level.level1_allow_flag = 0;
     
-                level.motor1_stop_cnt = 0;
-                level.motor1_delay_cnt    = 0;
+                level.motor1_stop_cnt    = 0;
+                level.motor1_delay_cnt   = 0;
                 level.motor1_start_flag  = 1;
+                level.motor1_delay_flag  = 0; 
             }
         }
     }
 }
 
+
+void level2_scan( void )
+{
+
+    if( level2_h == BALL_H_UP ) //上浮球处于高位
+    {
+        level.level2_h_cnt++;
+        /*  未知原因导致墨水溢出 电机停止并报警  */
+        if( level.level2_h_cnt == 10 )
+        {
+            level.ink_overflow_flag  = 1;
+
+            MOTOR1 = MOTOR2 = MOTOR3 = MOTOR4 = MOTOR_OFF;
+            speak.buzzer_start_flag = 0;
+            buzzer = BUZZER_ON;
+    
+            level.level2_allow_flag = 0;
+            level.motor2_start_flag = 0;
+            level.level2_h_cnt = 0;
+        }
+    }else 
+    {
+        //level2_h_cnt = 0;
+        if( level.level2_allow_flag == 1 )
+        {
+            if( level2_l == BALL_L_DOWN )
+            {
+                /*  下浮球下落，电机启动,定时器开始计时    */
+                MOTOR2 = MOTOR_ON;
+                level.level2_allow_flag = 0;
+    
+                level.motor2_stop_cnt = 0;
+                level.motor2_delay_cnt    = 0;
+                level.motor2_start_flag  = 1;
+                level.motor2_delay_flag  = 0;
+            }
+        }
+    }
+}
+
+
+void level3_scan( void )
+{
+    
+    if( level3_h == BALL_H_UP ) //上浮球处于高位
+    {
+        level.level3_h_cnt++;
+        /*  未知原因导致墨水溢出 电机停止并报警  */
+        if( level.level3_h_cnt == 10 )
+        {
+            level.ink_overflow_flag  = 1;
+
+            MOTOR1 = MOTOR2 = MOTOR3 = MOTOR4 = MOTOR_OFF;
+            speak.buzzer_start_flag = 0;
+            buzzer = BUZZER_ON;
+    
+            level.level3_allow_flag = 0;
+            level.motor3_start_flag = 0;
+            level.level3_h_cnt = 0;
+        } 
+    }else 
+    {
+        //level3_h_cnt = 0;
+        if( level.level3_allow_flag == 1 )
+        {
+            if( level3_l == BALL_L_DOWN )
+            {
+                /*  下浮球下落，电机启动,定时器开始计时    */
+                MOTOR3 = MOTOR_ON;
+                level.level3_allow_flag = 0;
+    
+                level.motor3_stop_cnt = 0;
+                level.motor3_delay_cnt    = 0;
+                level.motor3_start_flag  = 1;
+                level.motor3_delay_flag  = 0;
+            }
+        }
+    }
+}
+
+
+void level4_scan( void )
+{
+    if( level4_h == BALL_H_UP ) //上浮球处于高位
+    {
+        level.level4_h_cnt++;
+        /*  未知原因导致墨水溢出 电机停止并报警  */
+        if( level.level4_h_cnt == 10 )
+        {
+            level.ink_overflow_flag  = 1;
+
+            MOTOR1 = MOTOR2 = MOTOR3 = MOTOR4 = MOTOR_OFF;
+            speak.buzzer_start_flag = 0;
+            buzzer = BUZZER_ON;
+    
+            level.level4_allow_flag = 0;
+            level.motor4_start_flag = 0;
+            level.level4_h_cnt = 0;
+        } 
+    }else 
+    {
+        //level4_h_cnt = 0;
+        if( level.level4_allow_flag == 1 )
+        {
+            if( level4_l == BALL_L_DOWN )
+            {
+                /*  下浮球下落，电机启动,定时器开始计时    */
+                MOTOR4 = MOTOR_ON;
+                level.level4_allow_flag = 0;
+    
+                level.motor4_stop_cnt = 0;
+                level.motor4_delay_cnt    = 0;
+                level.motor4_start_flag  = 1;
+                level.motor4_delay_flag  = 0;
+            }
+        }
+    }
+}
 
 void Tim0Isr(void) interrupt 1 
 {
@@ -195,20 +309,20 @@ void Tim0Isr(void) interrupt 1
         if( level.motor1_delay_flag == 0 )
         {
             level.motor1_stop_cnt++;
-            if( LEVEL1_L != 0 )
+            if( level1_l == BALL_L_UP )
             {
                 level.motor1_stop_cnt = 0;
                 level.motor1_delay_flag = 1;
                 
-            }
-            if( level.motor1_stop_cnt >= level.motor_stop_time ) 
+            }else
             {
-                MOTOR1 = MOTOR_OFF;
-                level.motor1_start_flag = 0;
-                level.motor1_stop_cnt = 0;
-                level.motor1_warning_flag  = 1;
-                
-
+                if( level.motor1_stop_cnt >= level.motor_stop_time ) 
+                {
+                    MOTOR1 = MOTOR_OFF;
+                    level.motor1_start_flag = 0;
+                    level.motor1_stop_cnt = 0;
+                    level.motor1_warning_flag  = 1;   
+                }
             }
         }else
         {
@@ -219,20 +333,114 @@ void Tim0Isr(void) interrupt 1
                 level.motor1_start_flag = 0;
                 level.motor1_delay_flag = 0;
                 level.motor1_delay_cnt  = 0;
-                level.level1_allow_flag = 1;
-                
+                level.level1_allow_flag = 1; 
             }
         }
    }
 
    /*  levle2 补墨并计时    */
-   
-
+   if( level.motor2_start_flag == 1 )
+   {
+        if( level.motor2_delay_flag == 0 )
+        {
+            level.motor2_stop_cnt++;
+            if( level2_l == BALL_L_UP )
+            {
+                level.motor2_stop_cnt = 0;
+                level.motor2_delay_flag = 1;
+                
+            }else
+            {
+                if( level.motor2_stop_cnt >= level.motor_stop_time ) 
+                {
+                    MOTOR2 = MOTOR_OFF;
+                    level.motor2_start_flag = 0;
+                    level.motor2_stop_cnt = 0;
+                    level.motor2_warning_flag  = 1;   
+                }
+            }
+        }else
+        {
+            level.motor2_delay_cnt++;
+            if( level.motor2_delay_cnt >= level.motor_delay_time )
+            {
+                MOTOR2 = MOTOR_OFF;
+                level.motor2_start_flag = 0;
+                level.motor2_delay_flag = 0;
+                level.motor2_delay_cnt  = 0;
+                level.level2_allow_flag = 1; 
+            }
+        }
+   }
    /*  levle3 补墨并计时    */
-  
+   if( level.motor3_start_flag == 1 )
+   {
+        if( level.motor3_delay_flag == 0 )
+        {
+            level.motor3_stop_cnt++;
+            if( level3_l == BALL_L_UP )
+            {
+                level.motor3_stop_cnt = 0;
+                level.motor3_delay_flag = 1;
+                
+            }else
+            {
+                if( level.motor3_stop_cnt >= level.motor_stop_time ) 
+                {
+                    MOTOR3 = MOTOR_OFF;
+                    level.motor3_start_flag = 0;
+                    level.motor3_stop_cnt = 0;
+                    level.motor3_warning_flag  = 1;   
+                }
+            }
+        }else
+        {
+            level.motor3_delay_cnt++;
+            if( level.motor3_delay_cnt >= level.motor_delay_time )
+            {
+                MOTOR3 = MOTOR_OFF;
+                level.motor3_start_flag = 0;
+                level.motor3_delay_flag = 0;
+                level.motor3_delay_cnt  = 0;
+                level.level3_allow_flag = 1; 
+            }
+        }
+   }
 
    /*  levle4 补墨并计时    */
-   
+   if( level.motor4_start_flag == 1 )
+   {
+        if( level.motor4_delay_flag == 0 )
+        {
+            level.motor4_stop_cnt++;
+            if( level4_l == BALL_L_UP )
+            {
+                level.motor4_stop_cnt = 0;
+                level.motor4_delay_flag = 1;
+                
+            }else
+            {
+                if( level.motor4_stop_cnt >= level.motor_stop_time ) 
+                {
+                    MOTOR4 = MOTOR_OFF;
+                    level.motor4_start_flag = 0;
+                    level.motor4_stop_cnt = 0;
+                    level.motor4_warning_flag  = 1;   
+                }
+            }
+        }else
+        {
+            level.motor4_delay_cnt++;
+            if( level.motor4_delay_cnt >= level.motor_delay_time )
+            {
+                MOTOR4 = MOTOR_OFF;
+                level.motor4_start_flag = 0;
+                level.motor4_delay_flag = 0;
+                level.motor4_delay_cnt  = 0;
+                level.level4_allow_flag = 1; 
+            }
+        }
+   }
 
 
 }
@@ -294,62 +502,139 @@ void Tim1Isr(void) interrupt 3
 
 void get_ball_level( void )
 {
-    uint8_t i = 0;
+    uint8_t m = 0;
+    uint8_t n = 0;
     uint8_t j = 0;
     uint8_t k = 0;
     uint8_t level_statu = 0;
-    for( i = 0; i < 10; i++ )
+    for( m = 0; m < 10; m++ )
     {
-        switch (i)
+        for ( n = 0; n < 10; n++)
         {
-            case 0:
-                level_statu = LEVEL1_L;
-                break;
-
-            case 1:
-                level_statu = LEVEL1_H;
-                break;
-
-            case 2:
-                level_statu = LEVEL1_H;
-                break;
-
-            case 3:
-                level_statu = LEVEL1_H;
-                break;
-
-            case 4:
-                level_statu = LEVEL1_H;
-                break;
-
-            case 5:
-                level_statu = LEVEL1_H;
-                break;
-
-            case 6:
-                level_statu = LEVEL1_H;
-                break;
-
-            case 7:
-                level_statu = LEVEL1_H;
-                break;
-
-            default:
-                break;
+            switch (m)
+            {
+                case 0:
+                    level_statu = LEVEL1_L;
+                    break;
+    
+                case 1:
+                    level_statu = LEVEL1_H;
+                    break;
+    
+                case 2:
+                    level_statu = LEVEL2_L;
+                    break;
+    
+                case 3:
+                    level_statu = LEVEL2_H;
+                    break;
+    
+                case 4:
+                    level_statu = LEVEL3_L;
+                    break;
+    
+                case 5:
+                    level_statu = LEVEL3_H;
+                    break;
+    
+                case 6:
+                    level_statu = LEVEL4_L;
+                    break;
+    
+                case 7:
+                    level_statu = LEVEL4_H;
+                    break;
+    
+                default:
+                    break;
+            }
+            if( level_statu == 0 )
+            {
+                j++;
+            }else
+            {
+                k++;
+            }
         }
-        if( LEVEL1_H == 0 )
+        if( j >= k )
         {
-            j++;
+            switch (m)
+            {
+                case 0:
+                    level1_l = 0;
+                    break;
+    
+                case 1:
+                    level1_h = 0;
+                    break;
+    
+                case 2:
+                    level2_l = 0;
+                    break;
+    
+                case 3:
+                    level2_h = 0;
+                    break;
+    
+                case 4:
+                    level3_l = 0;
+                    break;
+    
+                case 5:
+                    level3_h = 0;
+                    break;
+    
+                case 6:
+                    level4_l = 0;
+                    break;
+    
+                case 7:
+                    level4_h = 0;
+                    break;
+    
+                default:
+                    break;
+            }
         }else
         {
-            k++;
-        }
-    }
-    if( j >= k )
-    {
-        level[i] = 0;
-    }else
-    {
-        level[i] = 1;
-    }
+            switch (m)
+            {
+                case 0:
+                    level1_l = 1;
+                    break;
+    
+                case 1:
+                    level1_h = 1;
+                    break;
+    
+                case 2:
+                    level2_l = 1;
+                    break;
+    
+                case 3:
+                    level2_h = 1;
+                    break;
+    
+                case 4:
+                    level3_l = 1;
+                    break;
+    
+                case 5:
+                    level3_h = 1;
+                    break;
+    
+                case 6:
+                    level4_l = 1;
+                    break;
+    
+                case 7:
+                    level4_h = 1;
+                    break;
+    
+                default:
+                    break;
+            } 
+        } 
+        j = k = 0;
+    }   
 }

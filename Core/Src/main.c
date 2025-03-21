@@ -14,7 +14,7 @@ void main( void )
     motor_init();
     level_params_init();
     speak_param_init();
-    
+    get_ball_level();
 
     EA = 1;
     //eeprom_statu_judge();
@@ -25,11 +25,17 @@ void main( void )
         level_statu();
         key_reset();
         Modbus_Event();
-        
-        printf("The value of level.motor_stop_time is %d \r\n",(int)level.motor_stop_time);
-        printf("The value of level.motor_delay_time is %d \r\n",(int)level.motor_delay_time);
-        printf("The value of motor1_stop_cnt is %d \r\n",(int)level.motor1_stop_cnt);
-        printf("The value of motor1_delay_cnt is %d \r\n",(int)level.motor1_delay_cnt);
-        delay_ms(50);
+        get_ball_level();
+        printf("motor1_stop_cnt is %d \r\n",(int)level.motor1_stop_cnt);
+        printf("motor1_delay_cnt is %d \r\n",(int)level.motor1_delay_cnt);
+        printf("level1_l is %d \r\n",(int)level1_l);
+        printf("level1_h is %d \r\n",(int)level1_h);
+        printf("level2_h is %d \r\n",(int)level2_h);
+        printf("level3_h is %d \r\n",(int)level3_h);
+        printf("level4_h is %d \r\n",(int)level4_h);
+        printf("level1_h_cnt is %d \r\n",(int)level.level1_h_cnt);
+        printf("level2_h_cnt is %d \r\n",(int)level.level2_h_cnt);
+        printf("level3_h_cnt is %d \r\n",(int)level.level3_h_cnt);
+        printf("level4_h_cnt is %d \r\n",(int)level.level4_h_cnt);
     }  
 }

@@ -1,11 +1,11 @@
-C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 16:02:27 PAGE 1   
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 22:37:33 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE LEVEL
 OBJECT MODULE PLACED IN ..\Output\level.obj
-COMPILER INVOKED BY: D:\APP\Keil_v5\C51\BIN\C51.EXE ..\BSP\Src\level.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\BSP\Inc;
-                    -..\Core\Inc;..\Drivers;..\Middlewares;..\Emembed\Inc;..\SYSTEM\Inc) DEBUG OBJECTEXTEND PRINT(.\Listings\level.lst) OBJEC
-                    -T(..\Output\level.obj)
+COMPILER INVOKED BY: D:\APP\Keil_STM32\C51\BIN\C51.EXE ..\BSP\Src\level.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\BSP\I
+                    -nc;..\Core\Inc;..\Drivers;..\Middlewares;..\Emembed\Inc;..\SYSTEM\Inc) DEBUG OBJECTEXTEND PRINT(.\Listings\level.lst) OB
+                    -JECT(..\Output\level.obj)
 
 line level    source
 
@@ -13,661 +13,668 @@ line level    source
    2          
    3          LEVEL level;
    4          SPEAK speak;
-   5          
-   6          void level_params_init( void )
-   7          {
-   8   1          level.motor_stop_time     = 18000;
-   9   1          level.motor_delay_time    = 3000;
-  10   1          level.level1_allow_flag   = 1;
-  11   1          level.motor1_start_flag   = 0;          
-  12   1          level.motor1_delay_flag   = 0;     
-  13   1          level.motor1_stop_cnt     = 0;
-  14   1          level.motor1_delay_cnt    = 0;
-  15   1          level.motor1_warning_flag = 0;
+   5          uint8_t level1_l, level2_l = BALL_L_UP;
+   6          uint8_t level3_l, level4_l = BALL_L_UP;
+   7          uint8_t level1_h, level2_h = BALL_H_DOWN;
+   8          uint8_t level3_h, level4_h = BALL_H_DOWN;
+   9          
+  10          void level_params_init( void )
+  11          {
+  12   1          level.level1_h_cnt  = 0;
+  13   1          level.level2_h_cnt  = 0;
+  14   1          level.level3_h_cnt  = 0;
+  15   1          level.level4_h_cnt  = 0;
   16   1      
-  17   1          level.level2_allow_flag   = 1;
-  18   1          level.motor2_start_flag   = 0;          
-  19   1          level.motor2_delay_flag   = 0;     
-  20   1          level.motor2_delay_cnt    = 0;
-  21   1          level.motor2_stop_cnt     = 0;
-  22   1          level.motor2_warning_flag = 0;
-  23   1      
-  24   1          level.level3_allow_flag   = 1;
-  25   1          level.motor3_start_flag   = 0;          
-  26   1          level.motor3_delay_flag   = 0;     
-  27   1          level.motor3_delay_cnt    = 0;
-  28   1          level.motor3_stop_cnt     = 0;
-  29   1          level.motor3_warning_flag = 0;
-  30   1      
-  31   1          level.level4_allow_flag   = 1;
-  32   1          level.motor4_start_flag   = 0;          
-  33   1          level.motor4_delay_flag   = 0;     
-  34   1          level.motor4_delay_cnt    = 0;
-  35   1          level.motor4_stop_cnt     = 0;
-  36   1          level.motor4_warning_flag = 0;
-  37   1      
-  38   1          level.level5_allow_flag   = 1;
-  39   1          level.motor5_start_flag   = 0;          
-  40   1          level.motor5_delay_flag   = 0;     
-  41   1          level.motor5_delay_cnt    = 0;
-  42   1          level.motor5_stop_cnt     = 0;
-  43   1          level.motor5_warning_flag = 0;
-  44   1      
-  45   1          level.level6_allow_flag   = 1;
-  46   1          level.motor6_start_flag   = 0;          
-  47   1          level.motor6_delay_flag   = 0;     
-  48   1          level.motor6_delay_cnt    = 0;
-  49   1          level.motor6_stop_cnt     = 0;
-  50   1          level.motor6_warning_flag = 0;
-  51   1      }
-  52          
-  53          
-C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 16:02:27 PAGE 2   
+  17   1      
+  18   1          level.motor_stop_time     = 18000;
+  19   1          level.motor_delay_time    = 3000;
+  20   1          level.level1_allow_flag   = 1;
+  21   1          level.motor1_start_flag   = 0;          
+  22   1          level.motor1_delay_flag   = 0;     
+  23   1          level.motor1_stop_cnt     = 0;
+  24   1          level.motor1_delay_cnt    = 0;
+  25   1          level.motor1_warning_flag = 0;
+  26   1      
+  27   1          level.level2_allow_flag   = 1;
+  28   1          level.motor2_start_flag   = 0;          
+  29   1          level.motor2_delay_flag   = 0;     
+  30   1          level.motor2_delay_cnt    = 0;
+  31   1          level.motor2_stop_cnt     = 0;
+  32   1          level.motor2_warning_flag = 0;
+  33   1      
+  34   1          level.level3_allow_flag   = 1;
+  35   1          level.motor3_start_flag   = 0;          
+  36   1          level.motor3_delay_flag   = 0;     
+  37   1          level.motor3_delay_cnt    = 0;
+  38   1          level.motor3_stop_cnt     = 0;
+  39   1          level.motor3_warning_flag = 0;
+  40   1      
+  41   1          level.level4_allow_flag   = 1;
+  42   1          level.motor4_start_flag   = 0;          
+  43   1          level.motor4_delay_flag   = 0;     
+  44   1          level.motor4_delay_cnt    = 0;
+  45   1          level.motor4_stop_cnt     = 0;
+  46   1          level.motor4_warning_flag = 0;
+  47   1      
+  48   1          level.level5_allow_flag   = 1;
+  49   1          level.motor5_start_flag   = 0;          
+  50   1          level.motor5_delay_flag   = 0;     
+  51   1          level.motor5_delay_cnt    = 0;
+  52   1          level.motor5_stop_cnt     = 0;
+  53   1          level.motor5_warning_flag = 0;
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 22:37:33 PAGE 2   
 
-  54          void speak_param_init( void )
-  55          {
-  56   1          buzzer = 1;
-  57   1          //speak.buzzer_start_flag = 0;
-  58   1          speak.buzzer_runing_cnt = 0;
-  59   1          speak.buzzer_statu      = 0;
-  60   1      }
-  61          
-  62          void motor_init( void )
-  63          {
-  64   1          MOTOR1 = MOTOR_OFF;
-  65   1          MOTOR2 = MOTOR_OFF;
-  66   1          MOTOR3 = MOTOR_OFF;
-  67   1          MOTOR4 = MOTOR_OFF;
-  68   1          MOTOR5 = MOTOR_OFF;
-  69   1          MOTOR6 = MOTOR_OFF;
-  70   1      
-  71   1          level.ink_out_flag   = 0;
-  72   1          level.ink_out_alarm = 0;
-  73   1          level.ink_overflow_flag  = 0;
-  74   1          level.ink_overflow_alarm = 0;
-  75   1          INK_OUT = 0;
-  76   1          INK_OVERFLOW = 0;
-  77   1      }
-  78          
-  79          void level_statu( void )
-  80          {
-  81   1          level1_scan();
-  82   1          level2_scan();
-  83   1          level3_scan();
-  84   1          level4_scan();
-  85   1          level5_scan();
-  86   1          level6_scan();
-  87   1          
-  88   1          if( level.motor1_warning_flag | level.motor2_warning_flag | level.motor3_warning_flag    \
-  89   1              |level.motor4_warning_flag == 1 )   
-  90   1              {
-  91   2                  INK_OUT = 1;
-  92   2                  //speak.buzzer_start_flag = 1;
-  93   2                  buzzer = 0;
-  94   2                  level.ink_out_flag = 1;
-  95   2                  MOTOR1 = MOTOR_OFF;
-  96   2                  MOTOR2 = MOTOR_OFF;
-  97   2                  MOTOR3 = MOTOR_OFF;
-  98   2                  MOTOR4 = MOTOR_OFF;
-  99   2              }  else
- 100   1              {
- 101   2                  if((LEVEL1_H != 0)&&(LEVEL2_H != 0)&&(LEVEL3_H != 0)&&(LEVEL4_H != 0))
- 102   2                  {
- 103   3                      //buzzer = 1;
- 104   3                  }else
- 105   2                  {
- 106   3                      MOTOR1 = MOTOR_OFF;
- 107   3                      MOTOR2 = MOTOR_OFF;
- 108   3                      MOTOR3 = MOTOR_OFF;
- 109   3                      MOTOR4 = MOTOR_OFF;
- 110   3                      buzzer = 0;
- 111   3                  }
- 112   2                  
- 113   2              }     
- 114   1      }
- 115          
-C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 16:02:27 PAGE 3   
+  54   1      
+  55   1          level.level6_allow_flag   = 1;
+  56   1          level.motor6_start_flag   = 0;          
+  57   1          level.motor6_delay_flag   = 0;     
+  58   1          level.motor6_delay_cnt    = 0;
+  59   1          level.motor6_stop_cnt     = 0;
+  60   1          level.motor6_warning_flag = 0;
+  61   1      }
+  62          
+  63          
+  64          void speak_param_init( void )
+  65          {
+  66   1          buzzer = BUZZER_OFF;
+  67   1          speak.buzzer_start_flag = 0;
+  68   1          speak.buzzer_runing_cnt = 0;
+  69   1          speak.buzzer_statu      = 0;
+  70   1      }
+  71          
+  72          void motor_init( void )
+  73          {
+  74   1          MOTOR1 = MOTOR_OFF;
+  75   1          MOTOR2 = MOTOR_OFF;
+  76   1          MOTOR3 = MOTOR_OFF;
+  77   1          MOTOR4 = MOTOR_OFF;
+  78   1          MOTOR5 = MOTOR_OFF;
+  79   1          MOTOR6 = MOTOR_OFF;
+  80   1      
+  81   1          level.ink_overflow_flag  = 0;
+  82   1          level.ink_overflow_alarm = 0;
+  83   1          INK_OUT = 0;
+  84   1          INK_OVERFLOW = 0;
+  85   1      }
+  86          
+  87          
+  88          void key_reset( void )
+  89          {
+  90   1          while ( RESET == 0 )
+  91   1          {
+  92   2              delay_ms(100);
+  93   2              if( RESET == 0 )
+  94   2              {
+  95   3                  MOTOR1 = MOTOR_OFF;
+  96   3                  MOTOR2 = MOTOR_OFF;
+  97   3                  MOTOR3 = MOTOR_OFF;
+  98   3                  MOTOR4 = MOTOR_OFF;
+  99   3                  buzzer = BUZZER_OFF;
+ 100   3                  speak.buzzer_start_flag = 0;
+ 101   3                  // MOTOR5 = MOTOR_OFF;
+ 102   3                  // MOTOR6 = MOTOR_OFF;
+ 103   3                  INK_OUT = 0;
+ 104   3      
+ 105   3                  level.ink_overflow_flag  = 0;
+ 106   3                  level.ink_overflow_alarm = 0;
+ 107   3                  level.ink_overflow_cnt = 0;
+ 108   3          
+ 109   3                  level.level1_allow_flag    = 1;
+ 110   3                  level.motor1_warning_flag  = 0;
+ 111   3      
+ 112   3                  level.level2_allow_flag    = 1;
+ 113   3                  level.motor2_warning_flag  = 0;
+ 114   3      
+ 115   3                  level.level3_allow_flag    = 1;
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 22:37:33 PAGE 3   
 
- 116          
- 117          void level1_scan( void )
- 118          {
- 119   1          if( LEVEL1_H == 0 ) //上浮球处于高位
- 120   1          {
- 121   2              /*  未知原因导致墨水溢出 电机停止并报警  */
- 122   2              level.ink_overflow_flag  = 1;
- 123   2      
- 124   2              MOTOR1 = MOTOR_OFF;
- 125   2              buzzer = 0;
- 126   2              //speak.buzzer_start_flag = 1;
- 127   2      
- 128   2              level.level1_allow_flag = 0;
- 129   2              level.motor1_start_flag = 0;
- 130   2          }else 
- 131   1          {
- 132   2              if( level.level1_allow_flag == 1 )
- 133   2              {
- 134   3                  if( LEVEL1_L == 0 )
- 135   3                  {
- 136   4                      /*  下浮球下落，电机启动,定时器开始计时    */
- 137   4                      MOTOR1 = MOTOR_ON;
- 138   4                      buzzer = 1;
- 139   4                      level.level1_allow_flag = 0;
- 140   4          
- 141   4                      level.motor1_stop_cnt = 0;
- 142   4                      level.motor1_delay_cnt    = 0;
- 143   4                      level.motor1_start_flag  = 1;
- 144   4                  }
- 145   3              }
- 146   2          }
- 147   1      }
- 148          
- 149          void level2_scan( void )
- 150          {
- 151   1          if( LEVEL2_H == 0 ) //上浮球处于高位
- 152   1          {
- 153   2              /*  未知原因导致墨水溢出 电机停止并报警  */
- 154   2              level.ink_overflow_flag  = 1;
- 155   2      
- 156   2              MOTOR2 = MOTOR_OFF;
- 157   2              buzzer = 0;
- 158   2              level.level2_allow_flag = 0;
- 159   2              level.motor2_start_flag = 0;
- 160   2          }else 
- 161   1          {
- 162   2              if( level.level2_allow_flag == 1 )
- 163   2              {
- 164   3                  if( LEVEL2_L == 0 )
- 165   3                  {
- 166   4                      buzzer = 1;
- 167   4                      /*  下浮球下落，电机启动,定时器开始计时    */
- 168   4                      MOTOR2 = MOTOR_ON;
- 169   4                      level.level2_allow_flag = 0;
- 170   4          
- 171   4                      level.motor2_delay_cnt = 0;
- 172   4                      level.motor2_stop_cnt    = 0;
- 173   4                      level.motor2_start_flag  = 1;
- 174   4      
- 175   4                  }
- 176   3              }
- 177   2          }
-C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 16:02:27 PAGE 4   
+ 116   3                  level.motor3_warning_flag  = 0;
+ 117   3      
+ 118   3                  level.level4_allow_flag    = 1;
+ 119   3                  level.motor4_warning_flag  = 0;
+ 120   3      
+ 121   3                  level.level5_allow_flag    = 1;
+ 122   3                  level.motor5_warning_flag  = 0;
+ 123   3      
+ 124   3                  level.level6_allow_flag    = 1;
+ 125   3                  level.motor6_warning_flag  = 0;
+ 126   3              }
+ 127   2          }
+ 128   1      }
+ 129          
+ 130          
+ 131          void level_statu( void )
+ 132          {
+ 133   1          level1_scan();
+ 134   1          level2_scan();
+ 135   1          level3_scan();
+ 136   1          level4_scan();
+ 137   1          
+ 138   1          if( level.motor1_warning_flag | level.motor2_warning_flag       \
+ 139   1            | level.motor3_warning_flag | level.motor4_warning_flag == 1 )   
+ 140   1          {
+ 141   2              INK_OUT = 1;
+ 142   2              speak.buzzer_start_flag = 1;
+ 143   2          }    
+ 144   1      }
+ 145          
+ 146          
+ 147          void level1_scan( void )
+ 148          {
+ 149   1          if( level1_h == BALL_H_UP ) //上浮球处于高位
+ 150   1          {
+ 151   2              level.level1_h_cnt++;
+ 152   2              /*  未知原因导致墨水溢出 电机停止并报警  */
+ 153   2              if( level.level1_h_cnt == 10 )
+ 154   2              {
+ 155   3                  level.ink_overflow_flag  = 1;
+ 156   3      
+ 157   3                  MOTOR1 = MOTOR2 = MOTOR3 = MOTOR4 = MOTOR_OFF;
+ 158   3                  speak.buzzer_start_flag = 0;
+ 159   3                  buzzer = BUZZER_ON;
+ 160   3          
+ 161   3                  level.level1_allow_flag = 0;
+ 162   3                  level.motor1_start_flag = 0;
+ 163   3                  level.level1_h_cnt = 0;
+ 164   3              }
+ 165   2          }else 
+ 166   1          {
+ 167   2              //level1_h_cnt = 0;
+ 168   2              if( level.level1_allow_flag == 1 )
+ 169   2              {
+ 170   3                  if( level1_l == BALL_L_DOWN )
+ 171   3                  {
+ 172   4                      /*  下浮球下落，电机启动,定时器开始计时    */
+ 173   4                      MOTOR1 = MOTOR_ON;
+ 174   4                      level.level1_allow_flag = 0;
+ 175   4          
+ 176   4                      level.motor1_stop_cnt    = 0;
+ 177   4                      level.motor1_delay_cnt   = 0;
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 22:37:33 PAGE 4   
 
- 178   1      }
- 179          
- 180          void level3_scan( void )
- 181          {
- 182   1          if( LEVEL3_H == 0 ) //上浮球处于高位
- 183   1          {
- 184   2              /*  未知原因导致墨水溢出 电机停止并报警  */
- 185   2              level.ink_overflow_flag  = 1;
- 186   2      
- 187   2              MOTOR3 = MOTOR_OFF;
- 188   2              buzzer = 0;
- 189   2      
- 190   2              level.level3_allow_flag = 0;
- 191   2              level.motor3_start_flag = 0;
- 192   2          }else 
- 193   1          {
- 194   2              if( level.level3_allow_flag == 1 )
- 195   2              {
- 196   3                  if( LEVEL3_L == 0 )
- 197   3                  {
- 198   4                      /*  下浮球下落，电机启动,定时器开始计时    */
- 199   4                      buzzer = 1;
- 200   4                      MOTOR3 = MOTOR_ON;
- 201   4                      level.level3_allow_flag = 0;
- 202   4          
- 203   4                      level.motor3_delay_cnt = 0;
- 204   4                      level.motor3_stop_cnt    = 0;
- 205   4                      level.motor3_start_flag  = 1;
- 206   4                      
- 207   4                  }
- 208   3              }
- 209   2          }
- 210   1      }
- 211          
- 212          void level4_scan( void )
- 213          {
- 214   1          if( LEVEL4_H == 0 ) //上浮球处于高位
- 215   1          {
- 216   2              /*  未知原因导致墨水溢出 电机停止并报警  */
- 217   2              level.ink_overflow_flag  = 1;
- 218   2      
- 219   2              MOTOR4 = MOTOR_OFF;
- 220   2      
- 221   2              buzzer = 0;
- 222   2              level.level4_allow_flag = 0;
- 223   2              level.motor4_start_flag = 0;
- 224   2          }else 
- 225   1          {
- 226   2              if( level.level4_allow_flag == 1 )
- 227   2              {
- 228   3                  if( LEVEL4_L == 0 )
- 229   3                  {
- 230   4                      /*  下浮球下落，电机启动,定时器开始计时    */
- 231   4                      buzzer = 1;
- 232   4                      MOTOR4 = MOTOR_ON;
- 233   4                      level.level4_allow_flag = 0;
- 234   4          
- 235   4                      level.motor4_delay_cnt = 0;
- 236   4                      level.motor4_stop_cnt    = 0;
- 237   4                      level.motor4_start_flag  = 1;
- 238   4                   
- 239   4                  }
-C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 16:02:27 PAGE 5   
+ 178   4                      level.motor1_start_flag  = 1;
+ 179   4                      level.motor1_delay_flag  = 0; 
+ 180   4                  }
+ 181   3              }
+ 182   2          }
+ 183   1      }
+ 184          
+ 185          
+ 186          void level2_scan( void )
+ 187          {
+ 188   1      
+ 189   1          if( level2_h == BALL_H_UP ) //上浮球处于高位
+ 190   1          {
+ 191   2              level.level2_h_cnt++;
+ 192   2              /*  未知原因导致墨水溢出 电机停止并报警  */
+ 193   2              if( level.level2_h_cnt == 10 )
+ 194   2              {
+ 195   3                  level.ink_overflow_flag  = 1;
+ 196   3      
+ 197   3                  MOTOR1 = MOTOR2 = MOTOR3 = MOTOR4 = MOTOR_OFF;
+ 198   3                  speak.buzzer_start_flag = 0;
+ 199   3                  buzzer = BUZZER_ON;
+ 200   3          
+ 201   3                  level.level2_allow_flag = 0;
+ 202   3                  level.motor2_start_flag = 0;
+ 203   3                  level.level2_h_cnt = 0;
+ 204   3              }
+ 205   2          }else 
+ 206   1          {
+ 207   2              //level2_h_cnt = 0;
+ 208   2              if( level.level2_allow_flag == 1 )
+ 209   2              {
+ 210   3                  if( level2_l == BALL_L_DOWN )
+ 211   3                  {
+ 212   4                      /*  下浮球下落，电机启动,定时器开始计时    */
+ 213   4                      MOTOR2 = MOTOR_ON;
+ 214   4                      level.level2_allow_flag = 0;
+ 215   4          
+ 216   4                      level.motor2_stop_cnt = 0;
+ 217   4                      level.motor2_delay_cnt    = 0;
+ 218   4                      level.motor2_start_flag  = 1;
+ 219   4                      level.motor2_delay_flag  = 0;
+ 220   4                  }
+ 221   3              }
+ 222   2          }
+ 223   1      }
+ 224          
+ 225          
+ 226          void level3_scan( void )
+ 227          {
+ 228   1          
+ 229   1          if( level3_h == BALL_H_UP ) //上浮球处于高位
+ 230   1          {
+ 231   2              level.level3_h_cnt++;
+ 232   2              /*  未知原因导致墨水溢出 电机停止并报警  */
+ 233   2              if( level.level3_h_cnt == 10 )
+ 234   2              {
+ 235   3                  level.ink_overflow_flag  = 1;
+ 236   3      
+ 237   3                  MOTOR1 = MOTOR2 = MOTOR3 = MOTOR4 = MOTOR_OFF;
+ 238   3                  speak.buzzer_start_flag = 0;
+ 239   3                  buzzer = BUZZER_ON;
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 22:37:33 PAGE 5   
 
- 240   3              }
- 241   2          }
- 242   1      }
- 243          
- 244          void level5_scan( void )
- 245          {
- 246   1          if( LEVEL5_H == 0 ) //上浮球处于高位
- 247   1          {
- 248   2              /*  未知原因导致墨水溢出 电机停止并报警  */
- 249   2              level.ink_overflow_flag  = 1;
- 250   2      
- 251   2              MOTOR5 = MOTOR_OFF;
- 252   2      
- 253   2      
- 254   2              level.level5_allow_flag = 0;
- 255   2              level.motor5_start_flag = 0;
- 256   2          }else 
- 257   1          {
- 258   2              if( level.level5_allow_flag == 1 )
- 259   2              {
- 260   3                  if( LEVEL5_L == 0 )
- 261   3                  {
- 262   4                      /*  下浮球下落，电机启动,定时器开始计时    */
- 263   4                      MOTOR5 = MOTOR_ON;
- 264   4                      level.level5_allow_flag = 0;
- 265   4          
- 266   4                      level.motor5_delay_cnt = 0;
- 267   4                      level.motor5_stop_cnt    = 0;
- 268   4                      level.motor5_start_flag  = 1;
- 269   4                  }
- 270   3              }
- 271   2          }
- 272   1      }
- 273          
- 274          void level6_scan( void )
- 275          {
- 276   1          if( LEVEL6_H == 0 ) //上浮球处于低位
- 277   1          {
- 278   2              /*  未知原因导致墨水溢出 电机停止并报警  */
- 279   2              level.ink_overflow_flag  = 1;
- 280   2      
- 281   2              MOTOR6 = MOTOR_OFF;
- 282   2      
- 283   2             
- 284   2      
- 285   2              level.level6_allow_flag = 0;
- 286   2              level.motor6_start_flag = 0;
- 287   2          }else 
- 288   1          {
- 289   2              if( level.level6_allow_flag == 1 )
- 290   2              {
- 291   3                  if( LEVEL6_L == 0 )
- 292   3                  {
- 293   4                      /*  下浮球下落，电机启动,定时器开始计时    */
- 294   4                      MOTOR6 = MOTOR_ON;
- 295   4                      level.level6_allow_flag = 0;
- 296   4          
- 297   4                      level.motor6_delay_cnt = 0;
- 298   4                      level.motor6_stop_cnt    = 0;
- 299   4                      level.motor6_start_flag  = 1;
- 300   4                  }
- 301   3              }
-C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 16:02:27 PAGE 6   
+ 240   3          
+ 241   3                  level.level3_allow_flag = 0;
+ 242   3                  level.motor3_start_flag = 0;
+ 243   3                  level.level3_h_cnt = 0;
+ 244   3              } 
+ 245   2          }else 
+ 246   1          {
+ 247   2              //level3_h_cnt = 0;
+ 248   2              if( level.level3_allow_flag == 1 )
+ 249   2              {
+ 250   3                  if( level3_l == BALL_L_DOWN )
+ 251   3                  {
+ 252   4                      /*  下浮球下落，电机启动,定时器开始计时    */
+ 253   4                      MOTOR3 = MOTOR_ON;
+ 254   4                      level.level3_allow_flag = 0;
+ 255   4          
+ 256   4                      level.motor3_stop_cnt = 0;
+ 257   4                      level.motor3_delay_cnt    = 0;
+ 258   4                      level.motor3_start_flag  = 1;
+ 259   4                      level.motor3_delay_flag  = 0;
+ 260   4                  }
+ 261   3              }
+ 262   2          }
+ 263   1      }
+ 264          
+ 265          
+ 266          void level4_scan( void )
+ 267          {
+ 268   1          if( level4_h == BALL_H_UP ) //上浮球处于高位
+ 269   1          {
+ 270   2              level.level4_h_cnt++;
+ 271   2              /*  未知原因导致墨水溢出 电机停止并报警  */
+ 272   2              if( level.level4_h_cnt == 10 )
+ 273   2              {
+ 274   3                  level.ink_overflow_flag  = 1;
+ 275   3      
+ 276   3                  MOTOR1 = MOTOR2 = MOTOR3 = MOTOR4 = MOTOR_OFF;
+ 277   3                  speak.buzzer_start_flag = 0;
+ 278   3                  buzzer = BUZZER_ON;
+ 279   3          
+ 280   3                  level.level4_allow_flag = 0;
+ 281   3                  level.motor4_start_flag = 0;
+ 282   3                  level.level4_h_cnt = 0;
+ 283   3              } 
+ 284   2          }else 
+ 285   1          {
+ 286   2              //level4_h_cnt = 0;
+ 287   2              if( level.level4_allow_flag == 1 )
+ 288   2              {
+ 289   3                  if( level4_l == BALL_L_DOWN )
+ 290   3                  {
+ 291   4                      /*  下浮球下落，电机启动,定时器开始计时    */
+ 292   4                      MOTOR4 = MOTOR_ON;
+ 293   4                      level.level4_allow_flag = 0;
+ 294   4          
+ 295   4                      level.motor4_stop_cnt = 0;
+ 296   4                      level.motor4_delay_cnt    = 0;
+ 297   4                      level.motor4_start_flag  = 1;
+ 298   4                      level.motor4_delay_flag  = 0;
+ 299   4                  }
+ 300   3              }
+ 301   2          }
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 22:37:33 PAGE 6   
 
- 302   2          }
- 303   1      }
- 304          
- 305          
- 306          void key_reset( void )
- 307          {
- 308   1          while ( RESET == 0 )
- 309   1          {
- 310   2              delay_ms(100);
- 311   2              if( RESET == 0 )
- 312   2              {
- 313   3                  MOTOR1 = MOTOR_OFF;
- 314   3                  MOTOR2 = MOTOR_OFF;
- 315   3                  MOTOR3 = MOTOR_OFF;
- 316   3                  MOTOR4 = MOTOR_OFF;
- 317   3                  buzzer = 1;
- 318   3                  // MOTOR5 = MOTOR_OFF;
- 319   3                  // MOTOR6 = MOTOR_OFF;
- 320   3                  INK_OUT = 0;
- 321   3                  
- 322   3                 
- 323   3                  level.ink_out_flag   = 0;
- 324   3                  level.ink_out_alarm = 0;
- 325   3                  level.ink_out_cnt = 0;
- 326   3                  level.ink_overflow_flag  = 0;
- 327   3                  level.ink_overflow_alarm = 0;
- 328   3                  level.ink_overflow_cnt = 0;
- 329   3          
- 330   3                  level.level1_allow_flag    = 1;
- 331   3                  level.motor1_warning_flag  = 0;
- 332   3      
- 333   3                  level.level2_allow_flag    = 1;
- 334   3                  level.motor2_warning_flag  = 0;
- 335   3      
- 336   3                  level.level3_allow_flag    = 1;
- 337   3                  level.motor3_warning_flag  = 0;
- 338   3      
- 339   3                  level.level4_allow_flag    = 1;
- 340   3                  level.motor4_warning_flag  = 0;
- 341   3      
- 342   3                  level.level5_allow_flag    = 1;
- 343   3                  level.motor5_warning_flag  = 0;
- 344   3      
- 345   3                  level.level6_allow_flag    = 1;
- 346   3                  level.motor6_warning_flag  = 0;
- 347   3              }
- 348   2          }
- 349   1      }
- 350          
- 351          
- 352          void Tim0Isr(void) interrupt 1 
- 353          {
- 354   1         /*  levle1 补墨并计时    */
- 355   1         if( level.motor1_start_flag == 1 )
- 356   1         {
- 357   2              if( level.motor1_delay_flag == 0 )
- 358   2              {
- 359   3                  level.motor1_stop_cnt++;
- 360   3                  if( LEVEL1_L == 1 )
- 361   3                  {
- 362   4                      level.motor1_stop_cnt = 0;
- 363   4                      level.motor1_delay_flag = 1;
-C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 16:02:27 PAGE 7   
+ 302   1      }
+ 303          
+ 304          void Tim0Isr(void) interrupt 1 
+ 305          {
+ 306   1         /*  levle1 补墨并计时    */
+ 307   1         if( level.motor1_start_flag == 1 )
+ 308   1         {
+ 309   2              if( level.motor1_delay_flag == 0 )
+ 310   2              {
+ 311   3                  level.motor1_stop_cnt++;
+ 312   3                  if( level1_l == BALL_L_UP )
+ 313   3                  {
+ 314   4                      level.motor1_stop_cnt = 0;
+ 315   4                      level.motor1_delay_flag = 1;
+ 316   4                      
+ 317   4                  }else
+ 318   3                  {
+ 319   4                      if( level.motor1_stop_cnt >= level.motor_stop_time ) 
+ 320   4                      {
+ 321   5                          MOTOR1 = MOTOR_OFF;
+ 322   5                          level.motor1_start_flag = 0;
+ 323   5                          level.motor1_stop_cnt = 0;
+ 324   5                          level.motor1_warning_flag  = 1;   
+ 325   5                      }
+ 326   4                  }
+ 327   3              }else
+ 328   2              {
+ 329   3                  level.motor1_delay_cnt++;
+ 330   3                  if( level.motor1_delay_cnt >= level.motor_delay_time )
+ 331   3                  {
+ 332   4                      MOTOR1 = MOTOR_OFF;
+ 333   4                      level.motor1_start_flag = 0;
+ 334   4                      level.motor1_delay_flag = 0;
+ 335   4                      level.motor1_delay_cnt  = 0;
+ 336   4                      level.level1_allow_flag = 1; 
+ 337   4                  }
+ 338   3              }
+ 339   2         }
+ 340   1      
+ 341   1         /*  levle2 补墨并计时    */
+ 342   1         if( level.motor2_start_flag == 1 )
+ 343   1         {
+ 344   2              if( level.motor2_delay_flag == 0 )
+ 345   2              {
+ 346   3                  level.motor2_stop_cnt++;
+ 347   3                  if( level2_l == BALL_L_UP )
+ 348   3                  {
+ 349   4                      level.motor2_stop_cnt = 0;
+ 350   4                      level.motor2_delay_flag = 1;
+ 351   4                      
+ 352   4                  }else
+ 353   3                  {
+ 354   4                      if( level.motor2_stop_cnt >= level.motor_stop_time ) 
+ 355   4                      {
+ 356   5                          MOTOR2 = MOTOR_OFF;
+ 357   5                          level.motor2_start_flag = 0;
+ 358   5                          level.motor2_stop_cnt = 0;
+ 359   5                          level.motor2_warning_flag  = 1;   
+ 360   5                      }
+ 361   4                  }
+ 362   3              }else
+ 363   2              {
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 22:37:33 PAGE 7   
 
- 364   4                      
- 365   4                  }
- 366   3                  if( level.motor1_stop_cnt >= level.motor_stop_time ) 
- 367   3                  {
- 368   4                      MOTOR1 = MOTOR_OFF;
- 369   4                      level.motor1_start_flag = 0;
- 370   4                      level.motor1_stop_cnt = 0;
- 371   4                      level.motor1_warning_flag  = 1;
- 372   4                      
- 373   4      
- 374   4                  }
- 375   3              }else
- 376   2              {
- 377   3                  level.motor1_delay_cnt++;
- 378   3                  if( level.motor1_delay_cnt >= level.motor_delay_time )
- 379   3                  {
- 380   4                      MOTOR1 = MOTOR_OFF;
- 381   4                      level.motor1_start_flag = 0;
- 382   4                      level.motor1_delay_flag = 0;
- 383   4                      level.motor1_delay_cnt  = 0;
- 384   4                      level.level1_allow_flag = 1;
+ 364   3                  level.motor2_delay_cnt++;
+ 365   3                  if( level.motor2_delay_cnt >= level.motor_delay_time )
+ 366   3                  {
+ 367   4                      MOTOR2 = MOTOR_OFF;
+ 368   4                      level.motor2_start_flag = 0;
+ 369   4                      level.motor2_delay_flag = 0;
+ 370   4                      level.motor2_delay_cnt  = 0;
+ 371   4                      level.level2_allow_flag = 1; 
+ 372   4                  }
+ 373   3              }
+ 374   2         }
+ 375   1         /*  levle3 补墨并计时    */
+ 376   1         if( level.motor3_start_flag == 1 )
+ 377   1         {
+ 378   2              if( level.motor3_delay_flag == 0 )
+ 379   2              {
+ 380   3                  level.motor3_stop_cnt++;
+ 381   3                  if( level3_l == BALL_L_UP )
+ 382   3                  {
+ 383   4                      level.motor3_stop_cnt = 0;
+ 384   4                      level.motor3_delay_flag = 1;
  385   4                      
- 386   4                  }
- 387   3              }
- 388   2         }
- 389   1      
- 390   1         /*  levle2 补墨并计时    */
- 391   1         if( level.motor2_start_flag == 1 )
- 392   1         {
- 393   2              if( level.motor2_delay_flag == 0 )
- 394   2              {
- 395   3                  level.motor2_stop_cnt++;
- 396   3                  if( LEVEL2_L == 1 )
- 397   3                  {
- 398   4                      level.motor2_stop_cnt = 0;
- 399   4                      level.motor2_delay_flag = 1;
- 400   4                      
- 401   4                  }
- 402   3                  if( level.motor2_stop_cnt >= level.motor_stop_time ) 
- 403   3                  {
- 404   4                      MOTOR2 = MOTOR_OFF;
- 405   4                      level.motor2_start_flag = 0;
- 406   4                      level.motor2_stop_cnt = 0;
- 407   4                      level.motor2_warning_flag  = 1;
- 408   4      
- 409   4                  }
- 410   3              }else
- 411   2              {
- 412   3                  level.motor2_delay_cnt++;
- 413   3                  if( level.motor2_delay_cnt >= level.motor_delay_time )
- 414   3                  {
- 415   4                      MOTOR2 = MOTOR_OFF;
- 416   4                      level.motor2_start_flag = 0;
- 417   4                      level.motor2_delay_flag = 0;
- 418   4                      level.motor2_delay_cnt  = 0;
- 419   4                      level.level2_allow_flag = 1;
+ 386   4                  }else
+ 387   3                  {
+ 388   4                      if( level.motor3_stop_cnt >= level.motor_stop_time ) 
+ 389   4                      {
+ 390   5                          MOTOR3 = MOTOR_OFF;
+ 391   5                          level.motor3_start_flag = 0;
+ 392   5                          level.motor3_stop_cnt = 0;
+ 393   5                          level.motor3_warning_flag  = 1;   
+ 394   5                      }
+ 395   4                  }
+ 396   3              }else
+ 397   2              {
+ 398   3                  level.motor3_delay_cnt++;
+ 399   3                  if( level.motor3_delay_cnt >= level.motor_delay_time )
+ 400   3                  {
+ 401   4                      MOTOR3 = MOTOR_OFF;
+ 402   4                      level.motor3_start_flag = 0;
+ 403   4                      level.motor3_delay_flag = 0;
+ 404   4                      level.motor3_delay_cnt  = 0;
+ 405   4                      level.level3_allow_flag = 1; 
+ 406   4                  }
+ 407   3              }
+ 408   2         }
+ 409   1      
+ 410   1         /*  levle4 补墨并计时    */
+ 411   1         if( level.motor4_start_flag == 1 )
+ 412   1         {
+ 413   2              if( level.motor4_delay_flag == 0 )
+ 414   2              {
+ 415   3                  level.motor4_stop_cnt++;
+ 416   3                  if( level4_l == BALL_L_UP )
+ 417   3                  {
+ 418   4                      level.motor4_stop_cnt = 0;
+ 419   4                      level.motor4_delay_flag = 1;
  420   4                      
- 421   4                  }
- 422   3              }
- 423   2         }
- 424   1      
- 425   1         /*  levle3 补墨并计时    */
-C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 16:02:27 PAGE 8   
+ 421   4                  }else
+ 422   3                  {
+ 423   4                      if( level.motor4_stop_cnt >= level.motor_stop_time ) 
+ 424   4                      {
+ 425   5                          MOTOR4 = MOTOR_OFF;
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 22:37:33 PAGE 8   
 
- 426   1         if( level.motor3_start_flag == 1 )
- 427   1         {
- 428   2              if( level.motor3_delay_flag == 0 )
- 429   2              {
- 430   3                  level.motor3_stop_cnt++;
- 431   3                  if( LEVEL3_L == 1 )
- 432   3                  {
- 433   4                      level.motor3_stop_cnt = 0;
- 434   4                      level.motor3_delay_flag = 1;
- 435   4                      speak.buzzer_start_flag = 0;
- 436   4                  }
- 437   3                  if( level.motor3_stop_cnt >= level.motor_stop_time ) 
- 438   3                  {
- 439   4                      MOTOR3 = MOTOR_OFF;
- 440   4                      level.motor3_start_flag = 0;
- 441   4                      level.motor3_stop_cnt = 0;
- 442   4                      level.motor3_warning_flag  = 1;
- 443   4      
- 444   4                  }
- 445   3              }else
- 446   2              {
- 447   3                  level.motor3_delay_cnt++;
- 448   3                  if( level.motor3_delay_cnt >= level.motor_delay_time )
- 449   3                  {
- 450   4                      MOTOR3 = MOTOR_OFF;
- 451   4                      level.motor3_start_flag = 0;
- 452   4                      level.motor3_delay_flag = 0;
- 453   4                      level.motor3_delay_cnt  = 0;
- 454   4                      level.level3_allow_flag = 1;
- 455   4                      speak.buzzer_start_flag = 0;
- 456   4      
- 457   4                  }
- 458   3              }
- 459   2         }
- 460   1      
- 461   1         /*  levle4 补墨并计时    */
- 462   1         if( level.motor4_start_flag == 1 )
- 463   1         {
- 464   2              if( level.motor4_delay_flag == 0 )
- 465   2              {
- 466   3                  level.motor4_stop_cnt++;
- 467   3                  if( LEVEL4_L == 1 )
- 468   3                  {
- 469   4                      level.motor4_stop_cnt = 0;
- 470   4                      level.motor4_delay_flag = 1;
- 471   4                      speak.buzzer_start_flag = 0;
- 472   4                  }
- 473   3                  if( level.motor4_stop_cnt >= level.motor_stop_time ) 
- 474   3                  {
- 475   4                      MOTOR4 = MOTOR_OFF;
- 476   4                      level.motor4_start_flag = 0;
- 477   4                      level.motor4_stop_cnt = 0;
- 478   4                      level.motor4_warning_flag  = 1;
- 479   4      
- 480   4                  }
- 481   3              }else
- 482   2              {
- 483   3                  level.motor4_delay_cnt++;
- 484   3                  if( level.motor4_delay_cnt >= level.motor_delay_time )
- 485   3                  {
- 486   4                      MOTOR4 = MOTOR_OFF;
- 487   4                      level.motor4_start_flag = 0;
-C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 16:02:27 PAGE 9   
+ 426   5                          level.motor4_start_flag = 0;
+ 427   5                          level.motor4_stop_cnt = 0;
+ 428   5                          level.motor4_warning_flag  = 1;   
+ 429   5                      }
+ 430   4                  }
+ 431   3              }else
+ 432   2              {
+ 433   3                  level.motor4_delay_cnt++;
+ 434   3                  if( level.motor4_delay_cnt >= level.motor_delay_time )
+ 435   3                  {
+ 436   4                      MOTOR4 = MOTOR_OFF;
+ 437   4                      level.motor4_start_flag = 0;
+ 438   4                      level.motor4_delay_flag = 0;
+ 439   4                      level.motor4_delay_cnt  = 0;
+ 440   4                      level.level4_allow_flag = 1; 
+ 441   4                  }
+ 442   3              }
+ 443   2         }
+ 444   1      
+ 445   1      
+ 446   1      }
+ 447          
+ 448          void Tim1Isr(void) interrupt 3 
+ 449          {
+ 450   1          /* 1, 如果接收未超时                                             */
+ 451   1          if ( rs485.RX_rev_timeout != 0 )  
+ 452   1          {
+ 453   2              rs485.RX_rev_timeout--;
+ 454   2              /* 2, 如果接收超时                                          */
+ 455   2              if( rs485.RX_rev_timeout == 0 )  
+ 456   2              {
+ 457   3                  if( rs485.RX_rev_cnt > 0 )  
+ 458   3                  {   
+ 459   4                          /* 3, 接收完毕标志位亮起并初始化接收缓冲区         */
+ 460   4                      rs485.RX_rev_end_Flag = 1;    
+ 461   4                  }
+ 462   3              }
+ 463   2          } 
+ 464   1      
+ 465   1          if( speak.buzzer_start_flag == 1 ) 
+ 466   1          {
+ 467   2              speak.buzzer_runing_cnt++;
+ 468   2              if( speak.buzzer_runing_cnt == 50 )
+ 469   2              {
+ 470   3                  speak.buzzer_runing_cnt = 0;
+ 471   3                  speak.buzzer_statu = 1 - speak.buzzer_statu;
+ 472   3                  if(speak.buzzer_statu ==0)
+ 473   3                  {
+ 474   4                      buzzer = 1;
+ 475   4                  }else
+ 476   3                  {
+ 477   4                      buzzer = 0;
+ 478   4                  }
+ 479   3              
+ 480   3              }
+ 481   2          }else
+ 482   1          {
+ 483   2              speak.buzzer_runing_cnt = 0;
+ 484   2          }
+ 485   1      
+ 486   1      
+ 487   1         
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 22:37:33 PAGE 9   
 
- 488   4                      level.motor4_delay_flag = 0;
- 489   4                      level.motor4_delay_cnt  = 0;
- 490   4                      level.level4_allow_flag = 1;
- 491   4                      speak.buzzer_start_flag = 0;
- 492   4      
- 493   4                  }
- 494   3              }
- 495   2         }
- 496   1      
- 497   1      
- 498   1      //    /*  levle5 补墨并计时    */
- 499   1      //    if( level.motor5_start_flag == 1 )
- 500   1      //    {
- 501   1      //         if( level.motor5_delay_flag == 0 )
- 502   1      //         {
- 503   1      //             level.motor5_stop_cnt++;
- 504   1      //             if( LEVEL5_L == 1 )
- 505   1      //             {
- 506   1      //                 level.motor5_stop_cnt = 0;
- 507   1      //                 level.motor5_delay_flag = 1;
- 508   1      //             }
- 509   1      //             if( level.motor5_stop_cnt >= level.motor_stop_time ) 
- 510   1      //             {
- 511   1      //                 MOTOR5 = MOTOR_OFF;
- 512   1      //                 level.motor5_start_flag = 0;
- 513   1      //                 level.motor5_stop_cnt = 0;
- 514   1      //                 level.motor5_warning_flag  = 1;
- 515   1      
- 516   1      //             }
- 517   1      //         }else
- 518   1      //         {
- 519   1      //             level.motor5_delay_cnt++;
- 520   1      //             if( level.motor5_delay_cnt >= level.motor_delay_time )
- 521   1      //             {
- 522   1      //                 MOTOR5 = MOTOR_OFF;
- 523   1      //                 level.motor5_start_flag = 0;
- 524   1      //                 level.motor5_delay_flag = 0;
- 525   1      //                 level.motor5_delay_cnt  = 0;
- 526   1      //                 level.level5_allow_flag = 1;
- 527   1      
- 528   1      //             }
- 529   1      //         }
- 530   1      //    }
- 531   1      
- 532   1      
- 533   1      //    /*  levle6 补墨并计时    */
- 534   1      //    if( level.motor6_start_flag == 1 )
- 535   1      //    {
- 536   1      //         if( level.motor6_delay_flag == 0 )
- 537   1      //         {
- 538   1      //             level.motor6_stop_cnt++;
- 539   1      //             if( LEVEL6_L == 1 )
- 540   1      //             {
- 541   1      //                 level.motor6_stop_cnt = 0;
- 542   1      //                 level.motor6_delay_flag = 1;
- 543   1      //             }
- 544   1      //             if( level.motor6_stop_cnt >= level.motor_stop_time ) 
- 545   1      //             {
- 546   1      //                 MOTOR6 = MOTOR_OFF;
- 547   1      //                 level.motor6_start_flag = 0;
- 548   1      //                 level.motor6_stop_cnt = 0;
- 549   1      //                 level.motor6_warning_flag  = 1;
-C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 16:02:27 PAGE 10  
+ 488   1      
+ 489   1          if(( level.ink_overflow_flag == 1 ) && (level.ink_overflow_alarm == 0))
+ 490   1          {
+ 491   2              level.ink_overflow_cnt ++;
+ 492   2              INK_OVERFLOW = 1;
+ 493   2              if( level.ink_overflow_cnt == 100 )
+ 494   2              {
+ 495   3                  INK_OVERFLOW = 0;
+ 496   3                  level.ink_overflow_flag = 0;
+ 497   3                  level.ink_overflow_alarm = 1;  
+ 498   3                  level.ink_overflow_cnt = 0;
+ 499   3              }
+ 500   2          }
+ 501   1      }
+ 502          
+ 503          void get_ball_level( void )
+ 504          {
+ 505   1          uint8_t m = 0;
+ 506   1          uint8_t n = 0;
+ 507   1          uint8_t j = 0;
+ 508   1          uint8_t k = 0;
+ 509   1          uint8_t level_statu = 0;
+ 510   1          for( m = 0; m < 10; m++ )
+ 511   1          {
+ 512   2              for ( n = 0; n < 10; n++)
+ 513   2              {
+ 514   3                  switch (m)
+ 515   3                  {
+ 516   4                      case 0:
+ 517   4                          level_statu = LEVEL1_L;
+ 518   4                          break;
+ 519   4          
+ 520   4                      case 1:
+ 521   4                          level_statu = LEVEL1_H;
+ 522   4                          break;
+ 523   4          
+ 524   4                      case 2:
+ 525   4                          level_statu = LEVEL2_L;
+ 526   4                          break;
+ 527   4          
+ 528   4                      case 3:
+ 529   4                          level_statu = LEVEL2_H;
+ 530   4                          break;
+ 531   4          
+ 532   4                      case 4:
+ 533   4                          level_statu = LEVEL3_L;
+ 534   4                          break;
+ 535   4          
+ 536   4                      case 5:
+ 537   4                          level_statu = LEVEL3_H;
+ 538   4                          break;
+ 539   4          
+ 540   4                      case 6:
+ 541   4                          level_statu = LEVEL4_L;
+ 542   4                          break;
+ 543   4          
+ 544   4                      case 7:
+ 545   4                          level_statu = LEVEL4_H;
+ 546   4                          break;
+ 547   4          
+ 548   4                      default:
+ 549   4                          break;
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 22:37:33 PAGE 10  
 
- 550   1      
- 551   1      //             }
- 552   1      //         }else
- 553   1      //         {
- 554   1      //             level.motor6_delay_cnt++;
- 555   1      //             if( level.motor6_delay_cnt >= level.motor_delay_time )
- 556   1      //             {
- 557   1      //                 MOTOR6 = MOTOR_OFF;
- 558   1      //                 level.motor6_start_flag = 0;
- 559   1      //                 level.motor6_delay_flag = 0;
- 560   1      //                 level.motor6_delay_cnt  = 0;
- 561   1      //                 level.level6_allow_flag = 1;
- 562   1      
- 563   1      //             }
- 564   1      //         }
- 565   1      //    }
- 566   1      
- 567   1      }
- 568          
- 569          void Tim1Isr(void) interrupt 3 
- 570          {
- 571   1          /* 1, 如果接收未超时                                             */
- 572   1          if ( rs485.RX_rev_timeout != 0 )  
- 573   1          {
- 574   2              rs485.RX_rev_timeout--;
- 575   2              /* 2, 如果接收超时                                          */
- 576   2              if( rs485.RX_rev_timeout == 0 )  
- 577   2              {
- 578   3                  if( rs485.RX_rev_cnt > 0 )  
- 579   3                  {   
- 580   4                          /* 3, 接收完毕标志位亮起并初始化接收缓冲区         */
- 581   4                      rs485.RX_rev_end_Flag = 1;    
- 582   4                  }
- 583   3              }
- 584   2          } 
- 585   1      
- 586   1          // if( speak.buzzer_start_flag == 1 )
- 587   1          // {
- 588   1          //     speak.buzzer_runing_cnt++;
- 589   1          //     if( speak.buzzer_runing_cnt == 500 )
- 590   1          //     {
- 591   1          //         speak.buzzer_runing_cnt = 0;
- 592   1          //         speak.buzzer_statu = 1 - speak.buzzer_statu;
- 593   1          //         if(speak.buzzer_statu ==0)
- 594   1          //         {
- 595   1          //             buzzer = 1;
- 596   1          //         }else
- 597   1          //         {
- 598   1          //             buzzer = 0;
- 599   1          //         }
- 600   1              
- 601   1          //     }
- 602   1          // }else
- 603   1          // {
- 604   1          //     speak.buzzer_runing_cnt = 0;
- 605   1          // }
- 606   1      
- 607   1      
- 608   1          // if(( level.ink_out_flag == 1 ) && (level.ink_overflow_alarm == 0))
- 609   1          // {
- 610   1          //     level.ink_out_cnt ++;
- 611   1          //     INK_OUT = 1;
-C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 16:02:27 PAGE 11  
+ 550   4                  }
+ 551   3                  if( level_statu == 0 )
+ 552   3                  {
+ 553   4                      j++;
+ 554   4                  }else
+ 555   3                  {
+ 556   4                      k++;
+ 557   4                  }
+ 558   3              }
+ 559   2              if( j >= k )
+ 560   2              {
+ 561   3                  switch (m)
+ 562   3                  {
+ 563   4                      case 0:
+ 564   4                          level1_l = 0;
+ 565   4                          break;
+ 566   4          
+ 567   4                      case 1:
+ 568   4                          level1_h = 0;
+ 569   4                          break;
+ 570   4          
+ 571   4                      case 2:
+ 572   4                          level2_l = 0;
+ 573   4                          break;
+ 574   4          
+ 575   4                      case 3:
+ 576   4                          level2_h = 0;
+ 577   4                          break;
+ 578   4          
+ 579   4                      case 4:
+ 580   4                          level3_l = 0;
+ 581   4                          break;
+ 582   4          
+ 583   4                      case 5:
+ 584   4                          level3_h = 0;
+ 585   4                          break;
+ 586   4          
+ 587   4                      case 6:
+ 588   4                          level4_l = 0;
+ 589   4                          break;
+ 590   4          
+ 591   4                      case 7:
+ 592   4                          level4_h = 0;
+ 593   4                          break;
+ 594   4          
+ 595   4                      default:
+ 596   4                          break;
+ 597   4                  }
+ 598   3              }else
+ 599   2              {
+ 600   3                  switch (m)
+ 601   3                  {
+ 602   4                      case 0:
+ 603   4                          level1_l = 1;
+ 604   4                          break;
+ 605   4          
+ 606   4                      case 1:
+ 607   4                          level1_h = 1;
+ 608   4                          break;
+ 609   4          
+ 610   4                      case 2:
+ 611   4                          level2_l = 1;
+C51 COMPILER V9.60.7.0   LEVEL                                                             03/20/2025 22:37:33 PAGE 11  
 
- 612   1          //     if( level.ink_out_cnt == 100 )
- 613   1          //     {
- 614   1          //         INK_OUT = 0;
- 615   1          //         level.ink_overflow_alarm = 1;
- 616   1          //         level.ink_out_flag = 0;
- 617   1          //         level.ink_out_cnt = 0;
- 618   1          //     }
- 619   1          // }
- 620   1      
- 621   1          if(( level.ink_overflow_flag == 1 ) && (level.ink_overflow_alarm == 0))
- 622   1          {
- 623   2              level.ink_overflow_cnt ++;
- 624   2              INK_OVERFLOW = 1;
- 625   2              if( level.ink_overflow_cnt == 100 )
- 626   2              {
- 627   3                  INK_OVERFLOW = 0;
- 628   3                  level.ink_overflow_flag = 0;
- 629   3                  level.ink_overflow_alarm = 1;  
- 630   3                  level.ink_overflow_cnt = 0;
- 631   3              }
- 632   2          }
- 633   1      }
+ 612   4                          break;
+ 613   4          
+ 614   4                      case 3:
+ 615   4                          level2_h = 1;
+ 616   4                          break;
+ 617   4          
+ 618   4                      case 4:
+ 619   4                          level3_l = 1;
+ 620   4                          break;
+ 621   4          
+ 622   4                      case 5:
+ 623   4                          level3_h = 1;
+ 624   4                          break;
+ 625   4          
+ 626   4                      case 6:
+ 627   4                          level4_l = 1;
+ 628   4                          break;
+ 629   4          
+ 630   4                      case 7:
+ 631   4                          level4_h = 1;
+ 632   4                          break;
+ 633   4          
+ 634   4                      default:
+ 635   4                          break;
+ 636   4                  } 
+ 637   3              } 
+ 638   2              j = k = 0;
+ 639   2          }   
+ 640   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   1388    ----
+   CODE SIZE        =   1837    ----
    CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =     62    ----
+   XDATA SIZE       =     75       1
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
