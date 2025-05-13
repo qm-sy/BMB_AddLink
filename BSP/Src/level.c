@@ -2,10 +2,9 @@
 
 LEVEL level;
 SPEAK speak;
-uint8_t level1_l, level2_l = BALL_L_UP;
-uint8_t level3_l, level4_l = BALL_L_UP;
-uint8_t level1_h, level2_h = BALL_H_DOWN;
-uint8_t level3_h, level4_h = BALL_H_DOWN;
+
+uint8_t level1_l, level2_l, level3_l, level4_l = BALL_L_UP;
+uint8_t level1_h, level2_h , level3_h, level4_h = BALL_H_DOWN;
 
 void level_params_init( void )
 {
@@ -14,9 +13,13 @@ void level_params_init( void )
     level.level3_h_cnt  = 0;
     level.level4_h_cnt  = 0;
 
-
     level.motor_stop_time     = 18000;
     level.motor_delay_time    = 3000;
+    
+    level.ink_overflow_flag   = 0;
+    level.ink_overflow_cnt    = 0;
+    level.ink_overflow_allow  = 1;
+
     level.level1_allow_flag   = 1;
     level.motor1_start_flag   = 0;          
     level.motor1_delay_flag   = 0;     
@@ -64,9 +67,10 @@ void level_params_init( void )
 void speak_param_init( void )
 {
     buzzer = BUZZER_OFF;
-    speak.buzzer_start_flag = 0;
-    speak.buzzer_runing_cnt = 0;
-    speak.buzzer_statu      = 0;
+    speak.buzzer_start_allow = 1;
+    speak.buzzer_start_flag  = 0;
+    speak.buzzer_runing_cnt  = 0;
+    speak.buzzer_statu       = 0;
 }
 
 void motor_init( void )
@@ -78,8 +82,6 @@ void motor_init( void )
     MOTOR5 = MOTOR_OFF;
     MOTOR6 = MOTOR_OFF;
 
-    level.ink_overflow_flag  = 0;
-    level.ink_overflow_alarm = 0;
     INK_OUT = 0;
     INK_OVERFLOW = 0;
 }
@@ -96,15 +98,16 @@ void key_reset( void )
             MOTOR2 = MOTOR_OFF;
             MOTOR3 = MOTOR_OFF;
             MOTOR4 = MOTOR_OFF;
+
             buzzer = BUZZER_OFF;
             speak.buzzer_start_flag = 0;
-            // MOTOR5 = MOTOR_OFF;
-            // MOTOR6 = MOTOR_OFF;
+            speak.buzzer_start_allow = 1;
+
             INK_OUT = 0;
 
             level.ink_overflow_flag  = 0;
-            level.ink_overflow_alarm = 0;
             level.ink_overflow_cnt = 0;
+            level.ink_overflow_allow = 1;
     
             level.level1_allow_flag    = 1;
             level.motor1_warning_flag  = 0;
@@ -140,6 +143,22 @@ void level_statu( void )
     {
         INK_OUT = 1;
         speak.buzzer_start_flag = 1;
+
+        MOTOR1 = MOTOR_OFF;
+        level.motor1_start_flag = 0;
+        level.motor1_stop_cnt = 0;
+
+        MOTOR2 = MOTOR_OFF;
+        level.motor2_start_flag = 0;
+        level.motor2_stop_cnt = 0;
+
+        MOTOR3 = MOTOR_OFF;
+        level.motor3_start_flag = 0;
+        level.motor3_stop_cnt = 0;
+
+        MOTOR4 = MOTOR_OFF;
+        level.motor4_start_flag = 0;
+        level.motor4_stop_cnt = 0;
     }    
 }
 
@@ -153,18 +172,11 @@ void level1_scan( void )
         if( level.level1_h_cnt == 10 )
         {
             level.ink_overflow_flag  = 1;
-
-            MOTOR1 = MOTOR2 = MOTOR3 = MOTOR4 = MOTOR_OFF;
-            speak.buzzer_start_flag = 0;
-            buzzer = BUZZER_ON;
-    
-            level.level1_allow_flag = 0;
-            level.motor1_start_flag = 0;
             level.level1_h_cnt = 0;
         }
     }else 
     {
-        //level1_h_cnt = 0;
+        level.level1_h_cnt = 0;
         if( level.level1_allow_flag == 1 )
         {
             if( level1_l == BALL_L_DOWN )
@@ -193,18 +205,11 @@ void level2_scan( void )
         if( level.level2_h_cnt == 10 )
         {
             level.ink_overflow_flag  = 1;
-
-            MOTOR1 = MOTOR2 = MOTOR3 = MOTOR4 = MOTOR_OFF;
-            speak.buzzer_start_flag = 0;
-            buzzer = BUZZER_ON;
-    
-            level.level2_allow_flag = 0;
-            level.motor2_start_flag = 0;
             level.level2_h_cnt = 0;
         }
     }else 
     {
-        //level2_h_cnt = 0;
+        level.level2_h_cnt = 0;
         if( level.level2_allow_flag == 1 )
         {
             if( level2_l == BALL_L_DOWN )
@@ -233,18 +238,11 @@ void level3_scan( void )
         if( level.level3_h_cnt == 10 )
         {
             level.ink_overflow_flag  = 1;
-
-            MOTOR1 = MOTOR2 = MOTOR3 = MOTOR4 = MOTOR_OFF;
-            speak.buzzer_start_flag = 0;
-            buzzer = BUZZER_ON;
-    
-            level.level3_allow_flag = 0;
-            level.motor3_start_flag = 0;
             level.level3_h_cnt = 0;
         } 
     }else 
     {
-        //level3_h_cnt = 0;
+        level.level3_h_cnt = 0;
         if( level.level3_allow_flag == 1 )
         {
             if( level3_l == BALL_L_DOWN )
@@ -272,18 +270,11 @@ void level4_scan( void )
         if( level.level4_h_cnt == 10 )
         {
             level.ink_overflow_flag  = 1;
-
-            MOTOR1 = MOTOR2 = MOTOR3 = MOTOR4 = MOTOR_OFF;
-            speak.buzzer_start_flag = 0;
-            buzzer = BUZZER_ON;
-    
-            level.level4_allow_flag = 0;
-            level.motor4_start_flag = 0;
             level.level4_h_cnt = 0;
         } 
     }else 
     {
-        //level4_h_cnt = 0;
+        level.level4_h_cnt = 0;
         if( level.level4_allow_flag == 1 )
         {
             if( level4_l == BALL_L_DOWN )
@@ -462,7 +453,7 @@ void Tim1Isr(void) interrupt 3
         }
     } 
 
-    if( speak.buzzer_start_flag == 1 ) 
+    if(( speak.buzzer_start_flag == 1 ) && ( speak.buzzer_start_allow == 1))
     {
         speak.buzzer_runing_cnt++;
         if( speak.buzzer_runing_cnt == 50 )
@@ -483,19 +474,23 @@ void Tim1Isr(void) interrupt 3
         speak.buzzer_runing_cnt = 0;
     }
 
-
-   
-
-    if(( level.ink_overflow_flag == 1 ) && (level.ink_overflow_alarm == 0))
+    if(( level.ink_overflow_flag == 1 ) && ( level.ink_overflow_allow == 1 ))
     {
         level.ink_overflow_cnt ++;
         INK_OVERFLOW = 1;
-        if( level.ink_overflow_cnt == 100 )
+        if( level.ink_overflow_cnt == 10 )
         {
             INK_OVERFLOW = 0;
             level.ink_overflow_flag = 0;
-            level.ink_overflow_alarm = 1;  
             level.ink_overflow_cnt = 0;
+            level.ink_overflow_allow = 0;
+
+            level.level1_allow_flag = level.level2_allow_flag = level.level3_allow_flag = level.level4_allow_flag = 0 ;
+            level.motor1_start_flag = level.motor2_start_flag = level.motor3_start_flag = level.motor4_start_flag = 0;
+            MOTOR1 = MOTOR2 = MOTOR3 = MOTOR4 = MOTOR_OFF;
+            
+            speak.buzzer_start_allow = 0;
+            buzzer = BUZZER_ON;
         }
     }
 }

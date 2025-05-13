@@ -32,8 +32,7 @@ typedef struct
 
     uint8_t    ink_overflow_flag;
     uint8_t    ink_overflow_cnt;
-
-    uint8_t    ink_overflow_alarm;
+    uint8_t    ink_overflow_allow;
 
     uint8_t     level1_allow_flag;
     uint8_t     motor1_start_flag;          
@@ -84,6 +83,7 @@ typedef struct
     uint8_t  buzzer_start_flag;
     uint16_t buzzer_runing_cnt;
     uint8_t  buzzer_statu;
+    uint8_t  buzzer_start_allow;
 }SPEAK;
 
 extern LEVEL level;
